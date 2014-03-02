@@ -2,10 +2,11 @@
 % \documentclass[titleauthor]{mwart}
 \documentclass[10pt,a4paper]{article}
 
+\usepackage[intlimits]{amsmath}
 \usepackage{amsfonts}
-\usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{manfnt}
 
 \usepackage[mathscr]{eucal}
 
@@ -38,8 +39,13 @@
 \author{\Large{Na podstawie wykładu prof. J.Węglarza} \\ Skład: unvector}
 \title{\textbf{Metody probabilistyczne}}
 
-\newtheorem{defin}{Definicja}[section]
-\newtheorem{twier}{Twierdzenie}[section]
+\newtheorem{definition}{Definicja}[section]
+\newtheorem{theorem}{Twierdzenie}[section]
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\newcommand{\Warning}{\marginpar{\dbend}\textbf{\textit{Uwaga: }}}
+\newcommand{\dd}{\; \mathrm{d}}
 
 \transtrue
 
@@ -71,6 +77,7 @@ Przykładami zjawisk losowych są natomiast:
   \item ruch uliczny
   \item obsługa procesów w systemach komputerowych.
 \end{itemize}
+
 Warto ponadto podkreślić, że na poziomie kwantowym nie ma w ogóle zjawisk
 deterministycznych.
 W odniesieniu do zjawisk losowych pojawia się fundamentalne pytanie: jak często,
@@ -87,7 +94,7 @@ na połowęr~VII~w.\ i~są związane z nazwiskami uczonych:
 \begin{itemize}
   \item Blaise Pascal (1623-1662),
   \item Pierre de Fermat (1601-1665)\footnote{Wielkie twierdzenie Fermata:
-      $\forall n\in\mathbb{N}\,\neg\exists x,y,z\in C_+: x^n+y^n=z^n$.
+      $\forall n\in\mathbb{N}:\,\neg\exists x,y,z\in\mathbb{C}_+:\,,x^n+y^n=z^n$.
       Dowód tego twierdzenia został podany dopiero w 1994 r.\ przez A.\ J.\ Wiles,
       jednak do tej pory nie istnieje dowód analityczny.},
   \item Jacob Bernoulli (1654-1705).
@@ -142,503 +149,828 @@ po spełnieniu określonego zbioru warunków. Właśnie taki \textit{hipotetyczn
  (ilościowy lub jakościowy) wynik doświadczenia przeprowadzonego w~określonych
 warunkach nazywa~się w~rachunku prawdopodobieństwa} \textbf{zdarzeniem} (definicja).
 
-Weźmy przykładowo rzut sześcienną kostką, na której ściankach znajdują się liczby od 1 do 6. Zdarzeniem jest tu oczywiście wystąpienie na górnej ściance kostki jednej z tych liczb. Analizując ten przykład zauważmy dalej, że te zdarzenia są najprostszymi (nierozkładalnymi na prostsze) zdarzeniami, jakie mogą wystąpić w wyniku rozpatrywanego doświadczenia. Te \textit{najprostsze, nierozkładalne wyniki danego doświadczenia nazywamy} \textbf{zdarzeniami elementarnymi} (definicja).
+Weźmy przykładowo rzut sześcienną kostką, na której ściankach znajdują~się
+liczby od~1 do~6. Zdarzeniem jest tu oczywiście wystąpienie na górnej ściance
+kostki jednej z tych liczb. Analizując ten przykład zauważmy dalej, że~te
+zdarzenia~są najprostszymi (nierozkładalnymi na~prostsze) zdarzeniami, jakie
+mogą wystąpić w wyniku rozpatrywanego doświadczenia. Te \textit{najprostsze,
+nierozkładalne wyniki danego doświadczenia nazywamy} \textbf{zdarzeniami
+elementarnymi} (definicja).
 
-\textit{Zbiór wszystkich zdarzeń elementarnych dla danego doświadczenia} nazywać będziemy \textbf{przestrzenią zdarzeń elementarnych} i oznaczać przez $\Omega$, a jej elementy przez $\omega_1, \omega_2, \omega_3...$ (z~różnymi indeksami).
+\textit{Zbiór wszystkich zdarzeń elementarnych dla danego doświadczenia} nazywać
+będziemy \textbf{przestrzenią zdarzeń elementarnych} i oznaczać przez $\Omega$,
+a jej elementy przez $\omega_1, \omega_2, \omega_3,\dotsc$ (z~różnymi indeksami).
 Wracając do rozpatrywanego przykładu zauważmy, że:
 \begin{itemize}
-\item $\Omega = \{1, 2, 3, 4, 5, 6\}$,
-\item zdarzenie polegające na wypadnięciu liczby parzystej ma postać $\{2,4,6\}$,
-\item zdarzenie polegające na wypadnięciu liczby $\geq5$ ma postać $\{5, 6\}$
+  \item $\Omega = \{1, 2, 3, 4, 5, 6\}$,
+  \item zdarzenie polegające na wypadnięciu liczby parzystej ma postać
+    $\{2,4,6\}$,
+  \item zdarzenie polegające na wypadnięciu liczby $\geq5$ ma postać $\{5, 6\}$
+  \item itd.
 \end{itemize}
-itd. Zauważamy zatem, że zdarzenia są podzbiorami przestrzeni zdarzeń elementarnych $\Omega$; będziemy je oznaczać dużymi literami $A, B, C, ...$, a zbiór wszystkich zdarzeń oznaczymy przez $\mathscr{A}$ (ew. $\mathscr{F}$).\textbf{Uwaga}: Zbiór $\mathscr{A}$ nie zawsze jest tożsamy ze zbiorem wszystkich podzbiorów zbioru $\Omega$.
+
+Zauważamy zatem, że zdarzenia są podzbiorami przestrzeni zdarzeń elementarnych
+$\Omega$; będziemy je oznaczać dużymi literami $A, B, C,\dotsc$, a~zbiór
+wszystkich zdarzeń oznaczymy przez $\mathscr{A}$ (ew. $\mathscr{F}$).
+
+\Warning Zbiór $\mathscr{A}$ nie zawsze jest tożsamy ze~zbiorem wszystkich
+podzbiorów zbioru $\Omega$.
 
 W zbiorze $\mathscr{A}$ wyróżniamy dwa szczególne zdarzenia:
 \begin{itemize}
-\item \textbf{zdarzenie pewne} - zdarzenie, które w wyniku danego doświadczenia \textit{musi zajść}, czyli zdarzenie pokrywające się ze zbiorem $\Omega$.
-\item \textbf{zdarzenie niemożliwe} - zdarzenie, które w wyniku danego doświadczenia \textit{nie może zajść}, czyli zdarzenie pokrywające się ze zbiorem $\emptyset$.
+  \item \textbf{zdarzenie pewne} - zdarzenie, które w~wyniku danego
+    doświadczenia \textit{musi zajść}, czyli zdarzenie pokrywające~się
+    ze~zbiorem $\Omega$.
+  \item \textbf{zdarzenie niemożliwe} - zdarzenie, które w~wyniku danego
+    doświadczenia \textit{nie~może zajść}, czyli zdarzenie pokrywające~się
+    ze~zbiorem $\emptyset$.
 \end{itemize}
-Ponieważ, jak wyżej zaobserwowaliśmy, \textbf{istnieje ścisła analogia pomiędzy zdarzeniami a~zbiorami}, więc podstawowe działania na zdarzeniach są po prostu działaniami na zbiorach. Przykładowo mówimy, że zdarzenie $A$ \textit{zawiera się} w zdarzeniu $B$ (czyli $A\subset B$), jeśli każde zdarzenie elementarne ze zbioru $A$ należy również do zbioru $B$; \textit{sumą} zdarzeń $A$, $B$ (czyli $A\cup B$) nazywamy zdarzenie złożone ze zdarzeń elementarnych należących do zdarzenia $A$ lub do zdarzenia $B$; \textit{iloczynem} zdarzeń $A$, $B$ (czyli $A\cap B$) nazywamy zdarzenie złożone ze zdarzeń elementarnych należących do zdarzenia $A$ i do zdarzenia $B$, itd.
+
+Ponieważ, jak wyżej zaobserwowaliśmy, \textbf{istnieje ścisła analogia pomiędzy
+darzeniami a~zbiorami}, więc podstawowe działania na zdarzeniach są~po prostu
+działaniami na~zbiorach. Przykładowo mówimy, że~zdarzenie $A$
+\textit{zawiera~się} w~zdarzeniu $B$ (czyli $A\subset B$), jeśli każde zdarzenie
+elementarne ze~zbioru $A$ należy również do zbioru $B$; \textit{sumą} zdarzeń
+$A$, $B$ (czyli $A\cup B$) nazywamy zdarzenie złożone ze zdarzeń elementarnych
+należących do zdarzenia $A$ lub do zdarzenia $B$; \textit{iloczynem} zdarzeń
+$A$, $B$ (czyli $A\cap B$) nazywamy zdarzenie złożone ze zdarzeń elementarnych
+należących do~zdarzenia $A$ i~do~zdarzenia $B$, itd.
 \begin{itemize}
-\item Mówimy, że zdarzenia $A$, $B$ są \textbf{rozłączne} (wyłączają się), jeśli\\
-$A\cap B = \emptyset$.
-\item Mówimy, że zdarzenia $A$, $A'$ są \textbf{przeciwstawne}, jeśli\\
-$(A\cup A' = \Omega)\land(A\cap A' = \emptyset)$.
-\item Mówimy, że zdarzenia $A_1, A_2, A_3...$ tworzą \textbf{podział przestrzeni $\Omega$}, jeśli\\
-$(\bigcup_{i}A_i = \Omega)\land(A_i\cap A_j = \emptyset, i\neq j)$.
+  \item Mówimy, że zdarzenia $A$, $B$ są \textbf{rozłączne} (wyłączają się), jeśli
+    \[
+      A\cap B = \emptyset
+    \]
+  \item Mówimy, że zdarzenia $A$, $A'$ są \textbf{przeciwstawne}, jeśli
+    \[
+      (A\cup A' = \Omega)\land(A\cap A' = \emptyset)
+    \]
+  \item Mówimy, że zdarzenia $A_1, A_2, A_3,\dotsc$ tworzą \textbf{podział
+      przestrzeni $\Omega$}, jeśli
+    \[
+      \left(\bigcup_{i}A_i = \Omega\right)\land\left(A_i\cap A_j = \emptyset, i\neq j\right)
+    \]
 \end{itemize}
+
+
 \lecture{13.10.2008}
-\subsection{Aksjomatyczna definicja prawdopodobieństwa (aksjomatyka rachunku prawdopodobieństwa)}
-Z obserwacji zjawisk losowych wynika, że możliwość zajścia różnych zdarzeń jest różna. Chcąc oceniać zdarzenia ze względu na tę możliwość, musimy zatem zdefiniować
+\subsection{Aksjomatyczna definicja prawdopodobieństwa (aksjomatyka rachunku
+  prawdopodobieństwa)}
+Z obserwacji zjawisk losowych wynika, że możliwość zajścia różnych zdarzeń jest
+różna. Chcąc oceniać zdarzenia ze względu na tę możliwość, musimy zatem zdefiniować
 pewną miarę tej możliwości, którą nazwiemy właśnie prawdopodobieństwem.
 
-Historycznie istniały różne określenia prawdopodobieństwa, np. \textbf{określenie klasyczne} (Laplace'a), czy też \textbf{określenie geometryczne}.
-Określenia te miały jednak podstawowe wady; w szczególnosci wymagały założenia, że możliwość (czyli prawdopodobieństwo) zajścia każdego zdarzenia elementarnego jest
-jednakowa, a tym samym definiowały prawdopodobieństwo przez prawdopodobieństwo. Przede wszystkim jednak nie rozwiązywały one podstawowego problemu, polegającego na tym, 
-że nie zawsze każdy podzbiór zbioru $\Omega$ można uznać za zdarzenie, jeśli prawdopodobieństwo ma posiadać podstawową własność miary, a mianowicie własność
-\textbf{przeliczalnej addytywności ($\sigma$-addytywności)}, stwierdzającą, że prawdopodobieństwo sumy \textbf{dowolnej} liczby parami rozłącznych zdarzeń jest
-równe sumie prawdopodobieństw tych zdarzeń. Okazuje się, że gdybyśmy w przypadku nieprzeliczalnego zbioru $\Omega$ wzięli w charakterze zdarzeń losowych zbiór
-wszystkich podzbiorów tego zbioru, to otrzymalibyśmy w powyższym sformułowaniu jedynie znak $\leq$ (od sumy tych zdarzeń).
+Historycznie istniały różne określenia prawdopodobieństwa, np. \textbf{określenie
+  klasyczne} (Laplace'a), czy też \textbf{określenie geometryczne}. Określenia
+te miały jednak podstawowe wady; w szczególnosci wymagały założenia, że~możliwość
+(czyli prawdopodobieństwo) zajścia każdego zdarzenia elementarnego jest jednakowa,
+a tym samym definiowały prawdopodobieństwo przez prawdopodobieństwo. Przede
+wszystkim jednak nie rozwiązywały one podstawowego problemu, polegającego na tym,
+że nie zawsze każdy podzbiór zbioru $\Omega$ można uznać za zdarzenie, jeśli
+prawdopodobieństwo ma posiadać podstawową własność miary, a mianowicie własność
+\textbf{przeliczalnej addytywności ($\sigma$-addytywności)}, stwierdzającą,
+że~prawdopodobieństwo sumy \textbf{dowolnej} liczby parami rozłącznych zdarzeń
+jest równe sumie prawdopodobieństw tych zdarzeń. Okazuje się, że gdybyśmy
+w~przypadku nieprzeliczalnego zbioru $\Omega$ wzięli w charakterze zdarzeń
+losowych zbiór wszystkich podzbiorów tego zbioru, to otrzymalibyśmy w~powyższym
+sformułowaniu jedynie znak $\leq$ (od sumy tych zdarzeń).
 
-Zauważmy, że problem powyższy ma charakter uniwersalny, niezależny od charakteru elementów zbioru $\Omega$ i dotyczy jakiejkolwiek miary, określonej na podzbiorach tego zbioru.
-Jest to mianowicie problem tzw. \textbf{teorii miary}, która wraz z teorią całki (z którą jest ściśle związana) stanowi główny nurt teorii funkcji
-rzeczywistych, będących z kolei podstawowym działem analizy matematycznej, charakteryzującym się najsłabszymi założeniami odnośnie badanych obiektów (tych funkcji).
-Żeby mówić o tym ściślej, musimy wprowadzić szereg definicji.
-\begin{defin}
-Klasę (rodzinę) $\mathscr{A}$ podzbiorów przestrzeni $\Omega$ nazywamy \textbf{zamkniętą ze względu na daną operację}, jeśli wynik tej operacji na elementach klasy $\mathscr{A}$ również należy do $\mathscr{A}$.
-\end{defin}
-\begin{defin}
-Klasę $\mathscr{A}$ podzbiorów przestrzeni $\Omega$ nazywamy \textbf{algebrą (ciałem) zbiorów}, jeśli:
-\begin{enumerate}
-\item[1$^\circ$] $(A, B \in\mathscr{A}) \Longrightarrow (A\cup B \in \mathscr{A})$
-\item[2$^\circ$] $(A\in\mathscr{A})\Longrightarrow (A'=\Omega \backslash A \in \mathscr{A})$
-\end{enumerate}
-\end{defin}
+Zauważmy, że problem powyższy ma charakter uniwersalny, niezależny od charakteru
+elementów zbioru $\Omega$ i dotyczy jakiejkolwiek miary, określonej
+na~podzbiorach tego zbioru. Jest to mianowicie problem tzw.~\textbf{teorii miary},
+która wraz z~teorią całki (z którą jest ściśle związana) stanowi główny nurt
+teorii funkcji rzeczywistych, będących z kolei podstawowym działem analizy
+matematycznej, charakteryzującym się najsłabszymi założeniami odnośnie badanych
+obiektów (tych funkcji). Żeby mówić o tym ściślej, musimy wprowadzić szereg
+definicji.
+
+\begin{definition}
+  Klasę (rodzinę) $\mathscr{A}$ podzbiorów przestrzeni $\Omega$ nazywamy
+  \textbf{zamkniętą ze~względu na~daną operację}, jeśli wynik tej operacji
+  na~elementach klasy $\mathscr{A}$ również należy do~$\mathscr{A}$.
+\end{definition}
+
+\begin{definition}
+  Klasę $\mathscr{A}$ podzbiorów przestrzeni $\Omega$ nazywamy \textbf{algebrą
+    (ciałem) zbiorów}, jeśli:
+  \begin{enumerate}
+  \item[1$^\circ$] $(A, B \in\mathscr{A}) \Longrightarrow (A\cup B \in \mathscr{A})$
+  \item[2$^\circ$] $(A\in\mathscr{A})\Longrightarrow (A'=\Omega \backslash A
+    \in \mathscr{A})$
+  \end{enumerate}
+\end{definition}
+
 Zauważmy, że:
 \begin{itemize}
-\item $\Omega=A\cup A' \in \mathscr{A}$,
-\item $\emptyset=\Omega'\in\mathscr{A}$,
-\item $A\cap B\in\mathscr{A}$ (gdyż z prawa de Morgana $(A\cap B)'=A'\cup B'$),
-\item $A\backslash B=A\cap B' \in\mathscr{A}$.
+  \item $\Omega=A\cup A' \in \mathscr{A}$,
+  \item $\emptyset=\Omega'\in\mathscr{A}$,
+  \item $A\cap B\in\mathscr{A}$ (gdyż z prawa de Morgana $(A\cap B)'=A'\cup B'$),
+  \item $A\backslash B=A\cap B' \in\mathscr{A}$.
 \end{itemize}
-Widzimy zatem, że algebra zbiorów to klasa zbiorów zamknięta ze względu na wszystkie operacje  skończone.
-\begin{defin}
-Algebrę $\mathscr{A}$ podzbiorów przestrzeni $\Omega$ nazywamy \textbf{$\sigma$-algebrą (algebrą przeliczalnie addytywną)} zbiorów, jeśli:
-\begin{equation}
-(A_1, A_2, ...\in \mathscr{A}) \Longrightarrow (\bigcup_{i=1}^{\infty}A_i\in\mathscr{A})
-\end{equation}
-\end{defin}
-Z prawa de Morgana łatwo wykazać, że $(A_1, A_2, ...\in \mathscr{A}) \Longrightarrow (\bigcap_{i=1}^{\infty}A_i\in\mathscr{A})$.
-Zatem $\sigma$-algebra zbiorów to klasa zbiorów zamknięta ze względu na wszystkie operacje przeliczalne.
+Widzimy zatem, że~algebra zbiorów to~klasa zbiorów zamknięta ze~względu
+na~wszystkie operacje skończone.
+
+\begin{definition}
+  Algebrę $\mathscr{A}$ podzbiorów przestrzeni $\Omega$ nazywamy
+  \textbf{$\sigma$-algebrą (algebrą przeliczalnie addytywną)} zbiorów, jeśli:
+  \begin{equation}
+    \left(A_1, A_2,\dotsc \in \mathscr{A}\right) \Longrightarrow
+    \left(\bigcup_{i=1}^{\infty}A_i\in\mathscr{A}\right)
+  \end{equation}
+\end{definition}
+Z prawa de Morgana łatwo wykazać, że $(A_1, A_2,\dotsc\in \mathscr{A})
+\Longrightarrow \left(\bigcap_{i=1}^{\infty}A_i\in\mathscr{A}\right)$. Zatem
+$\sigma$-algebra zbiorów to~klasa zbiorów zamknięta ze~względu na~wszystkie
+operacje przeliczalne.
 
 Można wykazać następujące twierdzenie:
-\begin{twier}
-Dla dowolnej niepustej klasy $\mathscr{M}$ podzbiorów przestrzeni $\Omega$, istnieje najmniejsza $\sigma$-algebra podzbiorów tej przestrzeni, 
-zawierająca klasę $\mathscr{M}$. Nazywa się ona \textbf{$\sigma$-algebrą generowaną przez klasę $\mathscr{M}$.}
-\end{twier}
+\begin{theorem}
+  Dla dowolnej niepustej klasy $\mathscr{M}$ podzbiorów przestrzeni $\Omega$,
+  istnieje najmniejsza $\sigma$-algebra podzbiorów tej przestrzeni,
+  zawierająca klasę $\mathscr{M}$. Nazywa się ona \textbf{$\sigma$-algebrą
+    generowaną przez klasę $\mathscr{M}$.}
+\end{theorem}
 
-Jak wiadomo, iloczyn przeliczalnej liczby zbiorów otwartych nie jest na ogół zbiorem otwartym, a suma przeliczalnej liczby zbiorów domkniętych nie jest na ogół
-zbiorem domkniętym; natomiast podstawowym wymogiem użyteczności dalszych rozważań jest to, aby rozpatrywana klasa podzbiorów przestrzeni $\Omega$ była $\sigma$-algebrą,
-zawierającą wszystkie zbiory otwarte (a zatem i~domknięte). Prowadzi to do kolejnej definicji.
-\begin{defin}
-$\sigma$-algebrą podzbiorów przestrzeni $\Omega$ generowaną przez klasy wszystkich zbiorów otwartych (lub domkniętych) nazywamy \textbf{$\sigma$-algebrą 
-zbiorów borelowskich}, a jej elementy \textbf{zbiorami borelowskimi} (Emil Borel, (1871-1956)).
-\end{defin}
+Jak~wiadomo, iloczyn przeliczalnej liczby zbiorów otwartych nie~jest na~ogół
+zbiorem otwartym, a suma przeliczalnej liczby zbiorów domkniętych nie~jest
+na~ogół zbiorem domkniętym; natomiast podstawowym wymogiem użyteczności dalszych
+rozważań jest~to, aby~rozpatrywana klasa podzbiorów przestrzeni $\Omega$ była
+$\sigma$-algebrą, zawierającą wszystkie zbiory otwarte (a zatem i~domknięte).
+Prowadzi to do kolejnej definicji.
+\begin{definition}
+  $\sigma$-algebrą podzbiorów przestrzeni $\Omega$ generowaną przez klasy
+  wszystkich zbiorów otwartych (lub domkniętych) nazywamy \textbf{$\sigma$-algebrą
+  zbiorów borelowskich}, a jej elementy \textbf{zbiorami borelowskimi}
+  (Emil Borel, (1871-1956)).
+\end{definition}
+
 Możemy teraz zdefiniować pojęcie miary oraz pojęcie funkcji mierzalnej.
-\begin{defin}
-\textbf{Miarą} nazywamy każdą nieujemną, przeliczalnie addytywną funkcję rzeczywistą, określoną na pewnej $\sigma$-algebrze $\mathscr{A}$ podzbiorów przestrzeni $\Omega$,
-tzn. nieujemną funkcję rzeczywistą $\mu$, nierówną tożsamościowo nieskończoności taką, że:
-\begin{enumerate}
-\item $[(A_1,A_2,...\in\mathscr{A})\land(A_i\cap A_j=\emptyset,i\neq j)]\Longrightarrow[\mu(\bigcup_{i=1}^{\infty}A_i)=\sum_{i=1}^{\infty}\mu(A_i)]$
-\item $\mu(\emptyset)=0$
-\end{enumerate}
-\end{defin}
+\begin{definition}
+  \textbf{Miarą} nazywamy każdą nieujemną, przeliczalnie addytywną funkcję
+  rzeczywistą, określoną na pewnej $\sigma$-algebrze $\mathscr{A}$ podzbiorów
+  przestrzeni $\Omega$, tzn.\ nieujemną funkcję rzeczywistą $\mu$, nierówną
+  tożsamościowo nieskończoności taką, że:
+  \begin{enumerate}
+    \item $[(A_1,A_2,\dotsc\in\mathscr{A})\land(A_i\cap A_j=\emptyset,i\neq j)]
+      \Longrightarrow \left[\mu(\bigcup_{i=1}^{\infty}A_i)=\sum_{i=1}^{\infty}\mu(A_i)\right]$
+    \item $\mu(\emptyset)=0$
+  \end{enumerate}
+\end{definition}
 
-\begin{defin}
-Uporządkowaną trójkę $(\Omega, \mathscr{A}, \mu)$ nazywać będziemy \textbf{przestrzenią z miarą} (\textbf{przestrzenią mierzalną}), a elementy $\sigma$-algebry
-$\mathscr{A}$ \textbf{zbiorami mierzalnymi}.
-\end{defin}
-\begin{defin}
-Funkcję rzeczywistą $f$ nazywamy \textbf{mierzalną względem miary $\mu$}, jeśli:
-\begin{equation}
-\bigwedge_a\{\omega:f(\omega)<a\}\in \mathscr{A}
-\end{equation}
-Podobnie dla $>,\leq,\geq$. $\mathscr{A}$ jest $\sigma$-algebrą podzbiorów przestrzeni $\Omega$.
-\end{defin}
+\begin{definition}
+  Uporządkowaną trójkę $(\Omega, \mathscr{A}, \mu)$ nazywać będziemy
+  \textbf{przestrzenią z miarą} (\textbf{przestrzenią mierzalną}), a~elementy
+  $\sigma$-algebry $\mathscr{A}$ \textbf{zbiorami mierzalnymi}.
+\end{definition}
+
+\begin{definition}
+  Funkcję rzeczywistą $f$ nazywamy \textbf{mierzalną względem miary $\mu$}, jeśli:
+  \begin{equation}
+    \bigwedge_a\{\omega: f(\omega)<a\}\in \mathscr{A}
+  \end{equation}
+  Podobnie dla $>,\leq,\geq$. $\mathscr{A}$ jest $\sigma$-algebrą podzbiorów przestrzeni $\Omega$.
+\end{definition}
 
 Przykłady miar:
 \begin{enumerate}
-\item dla podzbioru przestrzeni $R^k$, miarą jest $k$\dywiz wymiarowa objętość (dla przestrzeni liniowej będzie to długość, dla płaszczyzny - powierzchnia, 
-dla przestrzeni trójwymiaowej objętość, itd.);
-\item w ośrodku naładowanym elektrycznie, miarą jest ładunek elektryczny podzbioru tego ośrodka;
-\item dla podzbiorów ośrodka materialnego, miarą jest masa podzbioru;
-\item jeśli $x_0\in\Omega$ i $\mathscr{A}$ jest $\sigma$-algebrą podzbiorów przestrzeni $\Omega$, to
-\[
-\mu: \mu(A) = \left\{ \begin{array}{ll}
-1 & \textrm{jeżeli $x_0\in A$}\\
-0 & \textrm{jeżeli $x_0\notin A$}
-\end{array} \right.
-\]
-\item miara Lebesgue'a, mająca fundamentalne znaczenie dla teorii całki.
+  \item dla podzbioru przestrzeni $R^k$, miarą jest $k$\dywiz wymiarowa objętość
+    (dla przestrzeni liniowej będzie to długość, dla płaszczyzny - powierzchnia,
+    dla przestrzeni trójwymiaowej objętość, itd.);
+  \item w ośrodku naładowanym elektrycznie, miarą jest ładunek elektryczny
+    podzbioru tego ośrodka;
+  \item dla podzbiorów ośrodka materialnego, miarą jest masa podzbioru;
+  \item jeśli $x_0\in\Omega$ i $\mathscr{A}$ jest $\sigma$-algebrą podzbiorów
+    przestrzeni $\Omega$, to
+    \[
+      \mu: \mu(A) = \left\{ \begin{array}{ll}
+      1 & \textrm{jeżeli $x_0\in A$}\\
+      0 & \textrm{jeżeli $x_0\notin A$}
+      \end{array} \right.
+    \]
+  \item miara Lebesgue'a, mająca fundamentalne znaczenie dla teorii całki.
 \end{enumerate}
-Podamy teraz kolejny przykład miary - prawdopodobieństwo (\textbf{aksjomatyka Kołmogorowa }(1933) - czyli aksjomatyczna definicja prawdopodobieństwa).
-Niech $\Omega$ będzie dowolnym zbiorem. Elementy $\omega_1, \omega_2, \omega_3...\in\Omega$ nazywamy \textbf{zdarzeniami elementarnymi}. Niech $\mathscr{A}$ będzie
-$\sigma$-algebrą podzbiorów przestrzeni $\Omega$. Elementy $A_1, A_2, A_3...\in\mathscr{A}$ nazywamy \textbf{zdarzeniami losowymi}. Dla każdego zdarzenia 
-$A\in\mathscr{A}$ określona jest liczba rzeczywista $P(A)$, zwana prawdopodobieństwem zdarzenia A, spełniającą następujące aksjomaty:
+
+Podamy teraz kolejny przykład miary - prawdopodobieństwo (\textbf{aksjomatyka
+  Kołmogorowa }(1933) - czyli aksjomatyczna definicja prawdopodobieństwa).
+
+Niech $\Omega$ będzie dowolnym zbiorem. Elementy $\omega_1, \omega_2,
+\omega_3dotsc\in\Omega$ nazywamy \textbf{zdarzeniami elementarnymi}. Niech
+$\mathscr{A}$ będzie $\sigma$-algebrą podzbiorów przestrzeni $\Omega$. Elementy
+$A_1, A_2, A_3\dotsc\in\mathscr{A}$ nazywamy \textbf{zdarzeniami losowymi}.
+Dla~każdego zdarzenia $A\in\mathscr{A}$ określona jest liczba rzeczywista
+$P(A)$, zwana prawdopodobieństwem zdarzenia A, spełniającą następujące aksjomaty:
 \begin{enumerate}
-\item[  AI.] $0 \leq P(A) \leq 1$
-\item[ AII.] $P(\Omega) = 1$
-\item[AIII.] $[(A_1,A_2,...\in\mathscr{A})\land(A_i\cap A_j=\emptyset,i\neq j)]\Longrightarrow[P(\bigcup_{i=1}^{\infty}A_i)=\Sigma_{i=1}^{\infty}P(A_i)]$
+  \item[  AI.] $0 \leq P(A) \leq 1$
+  \item[ AII.] $P(\Omega) = 1$
+  \item[AIII.] $[(A_1,A_2,\dotsc\in\mathscr{A})\land(A_i\cap A_j=\emptyset,i\neq j)]
+    \Longrightarrow[P(\bigcup_{i=1}^{\infty}A_i)=\Sigma_{i=1}^{\infty}P(A_i)]$
 \end{enumerate}
+
+
 \lecture{20.10.2008}
-Jeśli chodzi o $\sigma$-algebrę $\mathscr{A}$, to jeżeli przestrzeń $\Omega$ jest skończona lub przeliczalna, to jest nią ($\sigma$-algebrą) zbiór wszystkich podzbiorów
-przestrzeni $\Omega$; jeżeli natomiast $\Omega$ jest nieprzeliczalna, to w charakterze $\mathscr{A}$ weźmiemy $\sigma$-algebrę zbiorów borelowskich (najmniejsza
-$\sigma$-algebra generowana przez zbiór otwarty (domknięty)).
+Jeśli chodzi o $\sigma$-algebrę $\mathscr{A}$, to jeżeli przestrzeń $\Omega$
+jest skończona lub przeliczalna, to jest nią ($\sigma$-algebrą) zbiór wszystkich
+podzbiorów przestrzeni $\Omega$; jeżeli natomiast $\Omega$ jest nieprzeliczalna,
+to w charakterze $\mathscr{A}$ weźmiemy $\sigma$-algebrę zbiorów borelowskich
+(najmniejsza $\sigma$-algebra generowana przez zbiór otwarty (domknięty)).
 
-\textbf{Uwaga:} w świetle poprzednio podanych definicji, widzimy, że aksjomatyka Kołmogorowa definiuje miarę $P$ na elementach $\sigma$-algebry zdarzeń $\mathscr{A}$. Jest
-to tzw. \textbf{miara unormowana} ($P(\Omega)=1, P(\emptyset)=0$), która jest również nazywana \textbf{miarą probabilistyczną}.
+\Warning W~świetle poprzednio podanych definicji, widzimy, że~aksjomatyka
+Kołmogorowa definiuje miarę $P$ na elementach $\sigma$-algebry zdarzeń
+$\mathscr{A}$. Jest to tzw. \textbf{miara unormowana} ($P(\Omega)=1,
+P(\emptyset)=0$), która jest również nazywana \textbf{miarą probabilistyczną}.
 
-Uporządkowaną trójkę $\left\lbrace\Omega,\mathscr{A},P\right\rbrace$ nazywać będziemy \textbf{przestrzenią probabilistyczną}. Widzimy zatem, że istnieje ścisły związek
-pomiędzy rachunkiem (teorią) prawdopodobieństwa a~teorią miary.
+Uporządkowaną trójkę $\left\lbrace\Omega,\mathscr{A},P\right\rbrace$ nazywać
+będziemy \textbf{przestrzenią probabilistyczną}. Widzimy zatem, że~istnieje
+ścisły związek pomiędzy rachunkiem (teorią) prawdopodobieństwa a~teorią miary.
+
 \subsection{Prawdopodobieństwo warunkowe i całkowite. Twierdzenie Bayesa}
-\begin{twier}[O prawdopodobieństwie warunkowym]
-Jeśli $P(B)>0$, to prawdopodobieństwo warunkowe zdarzenia $A$ \textbf{pod warunkiem}, że zaszło zdarzenie $B$, wyraża się wzorem:
-\begin{equation}
-P(A|B) = \frac{P(A\cap B)}{P(B)} 
-\end{equation}
-\end{twier}
-\textbf{Dowód}. TODO
+
+\begin{theorem}[O prawdopodobieństwie warunkowym]
+  Jeśli $P(B)>0$, to prawdopodobieństwo warunkowe zdarzenia $A$ \textbf{pod
+    warunkiem}, że zaszło zdarzenie $B$, wyraża się wzorem:
+
+  \begin{equation}
+    \label{eq:prob:dep}
+    P(A|B) = \frac{P(A\cap B)}{P(B)}
+  \end{equation}
+\end{theorem}
+\begin{proof}
+  TODO
+\end{proof}
 
 Zauważmy, że $P(A\cap B)=P(B)\cdot P(A|B)$. Zatem jeśli $P(A_1\cap A_2)>0$, to:
-\[P(A_3|A_1\cap A_2)=\frac{P(A_1\cap A_2 \cap A_3)}{P(A_1\cap A_2)}\]
+\[
+  P(A_3|A_1\cap A_2)=\frac{P(A_1\cap A_2 \cap A_3)}{P(A_1\cap A_2)}
+\]
 Zatem:
-\[ P(A_1\cap A_2 \cap A_3) = P(A_1\cap A_2)\cdot P(A_3|A_1\cap A_2) = P(A_1)\cdot P(A_2|A_1)\cdot P(A_3|A_1\cap A_2) \]
+\[
+  P(A_1\cap A_2 \cap A_3) = P(A_1\cap A_2)\cdot P(A_3|A_1\cap A_2) = P(A_1)
+  \cdot P(A_2|A_1)\cdot P(A_3|A_1\cap A_2)
+\]
 i analogicznie dla dowolnego n.
 
-\begin{twier}[O prawdopodobieństwie całkowitym]
-Jeśli zdarzenia $A_1,A_2,...$ tworzą podział przestrzeni $\Omega$ oraz $P(A_i)>0$ dla $i=1,2,...$, to dla dowolnego zdarzenia $B$ słuszny jest wzór:
+\begin{theorem}[O prawdopodobieństwie całkowitym]
+  Jeśli zdarzenia $A_1,A_2,\dotsc$ tworzą podział przestrzeni $\Omega$ oraz
+  $P(A_i)>0$ dla $i=1,2,\dotsc$, to dla~dowolnego zdarzenia $B$ słuszny jest
+  wzór:
+  \begin{equation}
+    \label{eq:prob:sum}
+    P(B) = \sum_{i=1}^{\infty} P(A_i)\cdot P(B|A_i)
+  \end{equation}
+\end{theorem}
+\begin{proof}
+  Jeśli $A_1,A_2,\cdots$ stanowią podział przestrzeni $\Omega$ zachodzi:
+  \[
+    B = \bigcup_{i=1}^n B \cup A_i
+  \]
+
+  Z~czego wynika, że:
+
+  \[
+    P(B) = \sum_{i=1}^n P(A_i)P(B|A_i)
+  \]
+
+  Przekształcając wzór~\ref{eq:prob:dep} otrzymujemy $P(B \cap A_i) = P(A_i)
+  P(B|A_i)$, co po podstawieniu do powyższego wzoru daje:
+
+  \begin{equation}
+    P(B) = \sum_{i=1}^{n} P(A_i)\cdot P(B|A_i)
+  \end{equation}
+\end{proof}
+
+\begin{theorem}[Bayesa]
+  Jeśli zdarzenia $A_1,A_2,\dotsc$ tworzą podział przestrzeni $\Omega$,
+  $P(A_i)>0$ dla $i=1,2,\dotsc$ oraz $B$ jest zdarzeniem, dla którego $P(B)>0$,
+  to słuszny jest następujący wzór:
+  \begin{equation}
+    P(A_i|B) = \frac{P(A_i)\cdot P(B|A_i)}{\sum_{j=1}^{\infty}P(A_j)\cdot
+      P(B|A_j)},\:\textrm{dla}\:i=1,2,\dotsc
+  \end{equation}
+\end{theorem}
+\begin{proof}
+  TODO
+\end{proof}
+
+Powyższy wzór nazywa~się \textbf{wzorem Bayesa}, lub wzorem na~prawdopodobieństwo
+\textbf{a~posteriori} (gdyż definiuje prawdopodobieństwa zdarzeń $A_i$
+\textbf{po~zajściu} zdarzenia~$B$). Natomiast występujące w~tym wzorze
+prawdopodobieństwa $P(A_i)$ nazywają się prawdopodobieństwami \textbf{a~priori}
+lub prawdopodobieństwami \textbf{subiektywnymi}.
+
+\Warning Wzór Bayesa ma~ważne zastosowanie w~teorii decyzji. Wówczas
+$A_1,A_2,\dotsc$ oznaczają szeroko rozumiane stany natury, a~prawdopodobieństwa
+$P(B|A_i)$~są wiarygodnością wyniku doświadczenia~$B$ dla~stanów $A_i$. Zauważmy,
+że aby zastosować wzór Bayesa, musimy znać także prawdopodobieństwa a~priori
+$P(A_i), i=1,2,\dotsc$. Tzw. \textbf{postulat Bayesa} zakłada właśnie
+, że~prawdopodobieństwa te, tworzące tzw. \textbf{rozkład a~priori},
+są~\textbf{zawsze} znane, niezależnie od tego, czy natura jest losowa,
+czy~też~nie. Stanowią one mianowicie podsumowanie naszej wiedzy i/lub
+intuicji o~badanej rzeczywistości. W tym kontekście prawdopodobieństwa
+$P(A_i|B), i=1,2,\dotsc$, wyliczane ze wzoru Bayesa tworzą rozkład uściślający
+tę~wiedzę i/lub intuicję.
+
+\Warning Wzór Bayesa uogólnia się naturalnie
+na~sytuację, gdy zamiast zdarzenia $B$ mamy zdarzenia $B_1,B_2,\dotsc$, tworzące
+podział przestrzeni $\Omega$ i~takie, że $P(B_k)>0$ dla $k=1,2,\dotsc$; wówczas
+wzór ten przyjmuje postać:
 \begin{equation}
-P(B)=\sum_{i=1}^{\infty}P(A_i)\cdot P(B|A_i) 
+  P(A_i|B_k) = \frac{P(A_i)\cdot P(B_k|A_i)}{\sum_{j=1}^{\infty}P(A_j)\cdot
+    P(B_k|A_j)},\:\textrm{dla}\:i=1,2,\dotsc,\,k=1,2,\dotsc
 \end{equation}
-\end{twier}
-
-\begin{twier}[Bayesa]
-Jeśli zdarzenia $A_1,A_2,...$ tworzą podział przestrzeni $\Omega$, $P(A_i)>0$ dla $i=1,2,...$ oraz $B$ jest zdarzeniem, dla którego $P(B)>0$, to słuszny 
-jest następujący wzór:
-\begin{equation}
-P(A_i|B) = \frac{P(A_i)\cdot P(B|A_i)}{\sum_{j=1}^{\infty}P(A_j)\cdot P(B|A_j)}, \textrm{ dla } i=1,2,...\textrm{.} 
-\end{equation}
-\end{twier}
-\textbf{Dowód}. TODO
-
-Powyższy wzór nazywa się \textbf{wzorem Bayesa}, lub wzorem na prawdopodobieństwo \textbf{a posteriori} (gdyż definiuje prawdopodobieństwa zdarzeń $A_i$ \textbf{po zajściu}
-zdarzenia $B$). Natomiast występujące w tym wzorze prawdopodobieństwa $P(A_i)$ nazywają się prawdopodobieństwami \textbf{a~priori} lub 
-prawdopodobieństwami \textbf{subiektywnymi}.
-
-\textbf{Uwaga 1}. Wzór Bayesa ma ważne zastosowanie w teorii  decyzji. Wówczas $A_1,A_2,...$ oznaczają szeroko rozumiane stany natury, a prawdopodobieństwa $P(B|A_i)$ są
-wiarygodnością wyniku doświadczenia $B$ dla stanów $A_i$. Zauważmy, że aby zastosować wzór Bayesa, musimy znać także prawdopodobieństwa a~priori $P(A_i), i=1,2,...$.
-Tzw. \textbf{postulat Bayesa} zakłada właśnie, że prawdopodobieństwa te, tworzące tzw. \textbf{rozkład a priori}, są \textbf{zawsze} znane, niezależnie od tego, czy natura 
-jest losowa, czy też nie. Stanowią one mianowicie podsumowanie naszej wiedzy i/lub intuicji o badanej rzeczywistości. W tym kontekście prawdopodobieństwa 
-$P(A_i|B), i=1,2,...$, wyliczane ze wzoru Bayesa tworzą rozkład uściślający tę wiedzę i/lub intuicję.
-
-\textbf{Uwaga 2}. Wzór Bayesa uogólnia się naturalnie na sytuację, gdy zamiast zdarzenia B mamy zdarzenia $B_1,B_2,...$, tworzące podział przestrzeni $\Omega$ i takie,
-że $P(B_k)>0$ dla $k=1,2,...$; wówczas wzór ten przyjmuje postać:
-\begin{equation}
-P(A_i|B_k) = \frac{P(A_i)\cdot P(B_k|A_i)}{\sum_{j=1}^{\infty}P(A_j)\cdot P(B_k|A_j)}, \textrm{ dla } i=1,2,..., k=1,2,...\textrm{.}
-\end{equation}
-\textbf{Dowód}. TODO
+\begin{proof}
+  TODO
+\end{proof}
 
 \subsection{Niezależność zdarzeń}
-Jeżeli prawdopodobieństwo zdarzenia $A$ pod warunkiem, że zaszło zdarzenie $B$ jest różne od prawdopodobieństwa bezwarunkowego zdarzenia $A$, to znaczy, że zajście zdarzenia
-$B$ dostarcza pewnej informacji o zajściu zdarzenia $A$, a więc zdarzenia te są \textbf{zależne}.
+Jeżeli prawdopodobieństwo zdarzenia~$A$ pod~warunkiem, że~zaszło zdarzenie~$B$
+jest różne od~prawdopodobieństwa bezwarunkowego zdarzenia~$A$, to~znaczy,
+że~zajście zdarzenia~$B$ dostarcza pewnej informacji o~zajściu zdarzenia $A$,
+a~więc zdarzenia~te są~\textbf{zależne}.
 
-Jeżeli natomiast prawdopodobieństwo warunkowe zdarzenia $A$ pod warunkiem, że zaszło zdarzenie $B$ jest równe prawdopodobieństwu bezwarunkowemu zdarzenia $A$, to powiemy, 
-że zdarzenia $A$ i $B$ są \textbf{niezależne}.
+Jeżeli natomiast prawdopodobieństwo warunkowe zdarzenia~$A$ pod warunkiem,
+że~zaszło zdarzenie~$B$ jest równe prawdopodobieństwu bezwarunkowemu
+zdarzenia~$A$, to powiemy, że zdarzenia $A$ i~$B$ są~\textbf{niezależne}.
 
 Zauważmy, że zachodzi to, gdy:
-\[ P(A\cap B) = P(A)\cdot P(B),\]
+\[
+  P(A\cap B) = P(A)\cdot P(B),
+\]
 gdyż wówczas:
-\[ P(A|B)=\frac{P(A\cap B)}{P(B)}=\frac{P(A)\cdot P(B)}{P(B)} = P(A)\]
+\[
+  P(A|B)=\frac{P(A\cap B)}{P(B)}=\frac{P(A)\cdot P(B)}{P(B)} = P(A)
+\]
 Oczywiście, zachodzi również:
-\[ P(B|A)=\frac{P(A\cap B)}{P(A)}=\frac{P(A)\cdot P(B)}{P(A)} = P(B)\]
-Wynika stąd następująca definicja.
-\begin{defin}
-Zdarzenia $A$ i $B$ nazywamy \textbf{niezależnymi}, jeśli 
-\begin{equation}
-P(A\cap B)=P(A)\cdot P(B).
-\end{equation}
-\end{defin}
-Łatwo wykazać poniższe twierdzenie.
-\begin{twier}
-Następujące zdania są prawdziwe:
-\begin{enumerate}
-\item[1$^\circ$] dowolne zdarzenie $A$ i zdarzenie pewne $(\Omega)$ są niezależne
-\item[2$^\circ$] dowolne zdarzenie $A$ i zdarzenie niemożliwe $(\emptyset)$ są niezależne
-\item[3$^\circ$] zdarzenie pewne $(\Omega)$ i zdarzenie niemożliwe $(\emptyset)$ są niezależne
-\item[4$^\circ$] jeśli zdarzenia $A$ i $B$ są niezależne, to także zdarzenia $A$ i $B'$ są niezależne
-\end{enumerate}
-\end{twier}
-\textbf{Dowód}. TODO
+\[
+  P(B|A)=\frac{P(A\cap B)}{P(A)}=\frac{P(A)\cdot P(B)}{P(A)} = P(B)
+\]
 
-Definicja niezależności zdarzeń uogólnia się na większą ich liczbę:
-\begin{defin}
-Powiemy, że zdarzenia $A_1,A_2,...,A_n$ są \textbf{niezależne}, jeśli prawdopodobieństwo iloczynu dowolnej liczby różnych zdarzeń spośród nich jest równe iloczynowi
-prawdopodobieństw tych zdarzeń.
-\end{defin}
-Uwaga: niektórzy nazywają w/w niezależność \textbf{niezależnością wzajemną} (en block) w odróżnieniu od niezależności \textbf{parami}, \textbf{trójkami}, itd., gdy tylko
-pary, trójki itd. są niezależne. Oczywiście niezależność wzajemna implikuje niezależność parami, trójkami, itd., \textbf{ale nie odwrotnie}.
-\begin{defin}
-Zdarzenia $A_1,A_2,...$ są niezależne, jeśli dla dowolnego $n$ zdarzenia $A_1,A_2,...,A_n$ są niezależne.
-\end{defin}
+Wynika stąd następująca definicja.
+
+\begin{definition}
+  Zdarzenia $A$ i $B$ nazywamy \textbf{niezależnymi}, jeśli
+  \begin{equation}
+    P(A\cap B)=P(A)\cdot P(B).
+  \end{equation}
+\end{definition}
+
+Łatwo wykazać poniższe twierdzenie.
+\begin{theorem}
+  Następujące zdania są prawdziwe:
+  \begin{enumerate}
+    \item[1$^\circ$] dowolne zdarzenie~$A$ i~zdarzenie pewne ($\Omega$)
+      są~niezależne
+    \item[2$^\circ$] dowolne zdarzenie~$A$ i~zdarzenie niemożliwe ($\emptyset$)
+      są~niezależne
+    \item[3$^\circ$] zdarzenie pewne ($\Omega$) i~zdarzenie niemożliwe
+      ($\emptyset$) są~niezależne
+    \item[4$^\circ$] jeśli zdarzenia $A$ i~$B$ są niezależne, to~także zdarzenia
+      $A$ i~$B'$ są~niezależne
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  TODO
+\end{proof}
+
+Definicja niezależności zdarzeń uogólnia~się na~większą ich liczbę:
+\begin{definition}
+  Powiemy, że zdarzenia $A_1,A_2,...,A_n$ są~\textbf{niezależne}, jeśli
+  prawdopodobieństwo iloczynu dowolnej liczby różnych zdarzeń spośród nich jest
+  równe iloczynowi prawdopodobieństw tych zdarzeń.
+\end{definition}
+
+\Warning niektórzy nazywają w/w niezależność \textbf{niezależnością wzajemną}
+(en~block) w~odróżnieniu od niezależności \textbf{parami}, \textbf{trójkami},
+itd., gdy tylko pary, trójki, itd. są~niezależne. Oczywiście niezależność
+wzajemna implikuje niezależność parami, trójkami, itd.,
+\textbf{ale~nie~odwrotnie}.
+
+\begin{definition}
+  Zdarzenia $A_1,A_2,\dotsc$ są~niezależne, jeśli dla~dowolnego~$n$
+  zdarzenia~$A_1,A_2,\dotsc,A_n$ są~niezależne.
+\end{definition}
+
 Łatwo wykazać kolejne twierdzenie:
-\begin{twier}
-Następujące zdania są prawdziwe:
-\begin{enumerate}
-\item jeśli zdarzenia $A,B,C$ są niezależne, to także zdarzenia $A\cup B$ i $C$ są niezależne
-\item jeśli zdarzenia $A,B,C$ są niezależne oraz $P(C)>0$, to:
-\begin{equation}
-P(A\cap B|C)=P(A|C)\cdot P(B|C)
-\end{equation}
-\end{enumerate}
-\end{twier}
-\textbf{Dowód}. TODO
+
+\begin{theorem}
+  Następujące zdania są prawdziwe:
+  \begin{enumerate}
+    \item jeśli zdarzenia $A,B,C$ są~niezależne, to~także zdarzenia $A\cup B$
+      i~$C$ są niezależne
+    \item jeśli zdarzenia $A,B,C$ są~niezależne oraz $P(C)>0$, to:
+      \begin{equation}
+        P(A\cap B|C)=P(A|C)\cdot P(B|C)
+      \end{equation}
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  TODO
+\end{proof}
+
+
 \section{Zmienne losowe}
-\subsection{Pojęcie zmiennej losowej oraz jej rozkładu (prawdopodobieństwa) i dystrybuanty}
-Jak pamiętamy, natura zdarzeń elementarnych może być różnoraka, np. w rozpatrywanym rzucie monetą $\Omega=\left\lbrace O,R\right\rbrace $, w rzucie kostką sześcienną
-$\Omega=\left\lbrace 1,2,3,4,5,6\right\rbrace $ itp. Żeby się od tej różnorakości uwolnić, przypiszemy każdemu zdarzeniu elementarnemu liczbę rzeczywistą, np. w~pierwszym
-przypadku wyjściu orła 0, a wyjściu reszki 1, w drugim przypadku tę liczbę, która się pojawiła. W ten sposób definiujemy na przestrzeni zdarzeń elementarnych $\Omega$
-pewną funkcję rzeczywistą. Chcemy jednak, aby dla tej funkcji było określone prawdopodobieństwo przyjmowanych przez nią wartości z jak najobszerniejszej klasy podzbiorów prostych. Wiemy, że taką klasę stanowi $\sigma$-algebra zbiorów borelowskich. Jeśli zatem zażądamy, aby przeciwobrazy zbiorów borelowskich na prostej otrzymane
-za pomocą definiowanej funkcji, były zdarzeniami (czyli elementami $\sigma$-algebry $\mathscr{A}$), to prawdopodobieństwo takie będzie określone.
+\subsection{Pojęcie zmiennej losowej oraz jej rozkładu (prawdopodobieństwa)
+  i~dystrybuanty}
+Jak pamiętamy, natura zdarzeń elementarnych może być różnoraka, np.
+\ w~rozpatrywanym rzucie monetą $\Omega=\left\lbrace O,R\right\rbrace$, w~rzucie
+kostką sześcienną $\Omega=\left\lbrace 1,2,3,4,5,6\right\rbrace$, itp.
+Żeby~się od~tej różnorakości uwolnić, przypiszemy każdemu zdarzeniu
+elementarnemu liczbę rzeczywistą, np.\ w~pierwszym przypadku wyjściu orła 0,
+a~wyjściu reszki 1, w~drugim przypadku tę liczbę, która się pojawiła. W~ten
+sposób definiujemy na przestrzeni zdarzeń elementarnych $\Omega$ pewną funkcję
+rzeczywistą. Chcemy jednak, aby dla tej funkcji było określone prawdopodobieństwo
+przyjmowanych przez nią wartości z jak najobszerniejszej klasy podzbiorów prostych.
+Wiemy, że taką klasę stanowi $\sigma$-algebra zbiorów borelowskich. Jeśli zatem
+zażądamy, aby przeciwobrazy zbiorów borelowskich na prostej otrzymane za pomocą
+definiowanej funkcji, były zdarzeniami (czyli elementami $\sigma$-algebry
+$\mathscr{A}$), to prawdopodobieństwo takie będzie określone.
 
 \lecture{27.10.2008}
 Załóżmy, że dana jest przestrzeń probabilistyczna $\{\Omega,\mathscr{A},P\}$.
-\begin{defin}
-\textbf{Zmienną losową} (\textbf{rzeczywistą}) nazywamy funkcję rzeczywistą $X$ określoną na przestrzeni zdarzeń elementarnych $\Omega$ i taką, że przeciwobrazy 
-(otrzymane za pomocą tej funkcji) zbiorów borelowskich na prostej (w $R^1$) są zdarzeniami losowymi.
-\end{defin}
-Wystarczy wymagać, by przeciwobrazy $(-\infty, x)$ były zdarzeniami losowymi, gdyż każdy zbiór borelowski na prostej można otrzymać za pomocą przeliczalnej liczby działań na
-takich przedziałach.
 
-Innymi słowy, zmienna losowa $X$ to funkcja $\Omega\rightarrow R^1$ taka, że:
-\begin{equation}
-\bigwedge_x X^{-1}[(-\infty, x)] = \{\omega: X(\omega) < x\}\in \mathscr{A}
-\end{equation}
-Zauważamy zatem, że zmienna losowa to funkcja odwzorowująca przestrzeń $\Omega$ w prostą, mierzalna względem prawdopodobieństwa (czyli miary probabilistycznej $P$).
+\begin{definition}
+  \textbf{Zmienną losową} (\textbf{rzeczywistą}) nazywamy funkcję rzeczywistą~$X$
+  określoną na przestrzeni zdarzeń elementarnych $\Omega$ i taką, że~przeciwobrazy
+  (otrzymane za pomocą tej funkcji) zbiorów borelowskich na prostej (w~$\mathbb{R}^1$)
+  są zdarzeniami losowymi.
+\end{definition}
 
-W skrócie można zatem powiedzieć, że zmienna losowa jest mierzalnym względem $P$ odwzorowaniem $\Omega$ w prostej. Zmienne losowe będziemy oznaczać 
-$X(\omega), Y(\omega), ...$ lub w skrócie $X, Y, ...$, natomiast ich wartości (czyli \textbf{realizacje}) $x, y, ...$.
+Wystarczy wymagać, by przeciwobrazy $(-\infty, x)$ były zdarzeniami losowymi,
+gdyż każdy zbiór borelowski na prostej można otrzymać za pomocą przeliczalnej
+liczby działań na~takich przedziałach.
 
-Z powyższego wynika, że zmienna losowa $X$ w naturalny sposób generuje na prostej $\sigma$-algebrę zbiorów borelowskich, których przeciwobrazy są zdarzeniami losowymi, a zatem $\sigma$-algebrę $\mathscr{A}_X$ zdefiniowaną wzorem:
+Innymi słowy, zmienna losowa~$X$ to~funkcja $\Omega\rightarrow\mathbb{R}^1$
+taka, że:
 \begin{equation}
-\mathscr{A}_X = \{S: X^{-1}(S)\in\mathscr{A}\}
+  \bigwedge_x X^{-1}[(-\infty, x)] = \{\omega: X(\omega) < x\}\in\mathscr{A}
 \end{equation}
-Generuje ona także prawdopodobieństwo $P_X$ na elementach $\sigma$-algebry $\mathscr{A}_X$, zwane \textbf{prawdopodobieństwm indukowanym}, określone wzorem:
-\begin{equation}
-P_X(S) = P[X^{-1}(S)], S\in\mathscr{A}_X
-\end{equation}
-Prawdopodobieństwo indukowane definiuje tzw. \textbf{rozkład prawdopodobieństwa zmiennej losowej}, zdefiniowany zatem w następujący sposób:
-\begin{equation}
-P_X(S) = P[X^{-1}(S)] = P[\omega: X(\omega)\in S], S\in\mathscr{A}_X
-\end{equation}
-Oczywiście $ P_X(R^1) = P(\Omega) = 1 $.
-Uwaga: często zmienna losowa odwzorowuje przestrzeń $\Omega$ w~pewien podzbiór $R^1$. Wówczas można określić rozkład prawdopodobieństwa tylko na tym podzbiorze;
-zwykle jednak dla jednolitości dodaje się do tego podzbioru resztę zbioru $R^1$, traktując ją jako zdarzenie z prawdopodobieństwem równym 0.
+Zauważamy zatem, że zmienna losowa to funkcja odwzorowująca przestrzeń $\Omega$
+w~prostą, mierzalna względem prawdopodobieństwa (czyli miary probabilistycznej~$P$).
 
-Jak widzimy, rozkład prawdopodobieństwa jest \textbf{funkcją zbioru}. W klasycznej analizie jesteśmy przyzwyczajeni do \textbf{funkcji punktu}, chcąc zatem stosować aparat
-tej analizy zadajmy pytanie o istnienie funkcji punktu jedno-jednoznacznie odpowiadającej rozkładowi prawdopodobieństwa. Na gruncie teorii miary jest to tzw. 
-\textbf{problem dystrybuanty miary}. Można bowiem wykazać, że funkcja taka zawsze istnieje i nazywa się dystrybuantą.
+W~skrócie można zatem powiedzieć, że zmienna losowa jest mierzalnym względem~$P$
+odwzorowaniem $\Omega$ w prostej. Zmienne losowe będziemy oznaczać $X(\omega),
+Y(\omega),\dotsc$ lub~w~skrócie $X, Y,\dotsc$, natomiast ich wartości (czyli
+\textbf{realizacje}) $x, y,\dotsc$.
+
+Z~powyższego wynika, że~zmienna losowa $X$ w~naturalny sposób generuje na~prostej
+$\sigma$-algebrę zbiorów borelowskich, których przeciwobrazy są~zdarzeniami
+losowymi, a~zatem $\sigma$-algebrę $\mathscr{A}_X$ zdefiniowaną wzorem:
+
+\begin{equation}
+  \mathscr{A}_X = \{S: X^{-1}(S)\in\mathscr{A}\}
+\end{equation}
+
+Generuje ona także prawdopodobieństwo~$P_X$ na~elementach $\sigma$-algebry
+$\mathscr{A}_X$, zwane \textbf{prawdopodobieństwm indukowanym}, określone wzorem:
+
+\begin{equation}
+  P_X(S) = P[X^{-1}(S)], S\in\mathscr{A}_X
+\end{equation}
+
+Prawdopodobieństwo indukowane definiuje tzw.~\textbf{rozkład prawdopodobieństwa
+  zmiennej losowej}, zdefiniowany zatem w~następujący sposób:
+
+\begin{equation}
+  P_X(S) = P[X^{-1}(S)] = P[\omega: X(\omega)\in S], S\in\mathscr{A}_X
+\end{equation}
+
+Oczywiście $P_X(\mathbb{R}^1) = P(\Omega) = 1$.
+
+\Warning Często zmienna losowa odwzorowuje przestrzeń $\Omega$ w~pewien
+podzbiór~$\mathbb{R}^1$. Wówczas można określić rozkład prawdopodobieństwa tylko na tym
+podzbiorze; zwykle jednak dla~jednolitości dodaje~się do~tego podzbioru resztę
+zbioru~$\mathbb{R}^1$, traktując~ją jako zdarzenie z prawdopodobieństwem równym $0$.
+
+Jak widzimy, rozkład prawdopodobieństwa jest \textbf{funkcją zbioru}. W~klasycznej
+analizie jesteśmy przyzwyczajeni do~\textbf{funkcji punktu}, chcąc zatem stosować
+aparat tej analizy zadajmy pytanie o~istnienie funkcji punktu jednoznacznie
+odpowiadającej rozkładowi prawdopodobieństwa. Na gruncie teorii miary jest~to
+tzw.~\textbf{problem dystrybuanty miary}. Można bowiem wykazać, że~funkcja taka
+zawsze istnieje i~nazywa się dystrybuantą.
 
 Zdefiniujmy pewną funkcję rzeczywistą.
-\begin{defin}
-$F(x)$ będzie funkcją rzeczywistą, zdefiniowaną wzorem:
-\begin{eqnarray}
-F(x) & = & P_X[(-\infty, x)] = P\{X^{-1}[(-\infty, x)]\} =
-\nonumber \\
-& = &  P\{\omega: X(\omega)\in(-\infty,x)\} = P(X<x)
-\end{eqnarray}
-\end{defin}
-Łatwo zauważyć, że funkcja $F(x)$ ma następujące własności:
+
+\begin{definition}
+  $F(x)$ będzie funkcją rzeczywistą, zdefiniowaną wzorem:
+  \begin{eqnarray}
+    \label{eq:dist}
+    F(x) & = & P_X[(-\infty, x)] = P\{X^{-1}[(-\infty, x)]\} =
+    \nonumber \\
+    & = &  P\{\omega: X(\omega)\in(-\infty,x)\} = P(X<x)
+  \end{eqnarray}
+\end{definition}
+
+Łatwo zauważyć, że~funkcja $F(x)$ ma~następujące własności:
+
 \begin{enumerate}
-\item[a)] jest nieujemna i niemalejąca
-\item[b)] $F(-\infty) = 0$, $F(+\infty) = 1$
-\item[c)] jest przynajmniej lewostronnie ciągła, tzn. dla każdego ciągu \\ $x_1<x_2<...<x$, zbieżnego do x zachodzi:
-\[\lim_{k\rightarrow\infty}F(x_k) = F(x)\]
+  \item \label{enum:dist:p1} jest nieujemna i~niemalejąca
+  \item \label{enum:dist:p2} $F(-\infty) = 0$, $F(+\infty) = 1$
+  \item \label{enum:dist:p3} jest przynajmniej lewostronnie ciągła,
+    tzn.~dla~każdego ciągu $x_1<x_2<\dotsc<x$, zbieżnego do x zachodzi:
+    \[
+      \lim_{k\rightarrow\infty}F(x_k) = F(x)
+    \]
 \end{enumerate}
+
 Zauważmy jeszcze, że:
-\[\bigwedge_a P(X\geq a) = 1 - F(a)\]
-\[\bigwedge_{a,b: a<b} P(a\leq X<b) = F(b) - F(a)\]
+
+\[
+  \bigwedge_a P(X\geq a) = 1 - F(a)
+\]
+\[
+  \bigwedge_{a,b: a<b} P(a\leq X<b) = F(b) - F(a)
+\]
 
 Można wykazać następujące twierdzenie:
-\begin{twier}
-Na to, by funkcja rzeczywista $F(x)$ była dystrybuantą zmiennej losowej $X$ potrzeba i wystarcza, aby miała własności a), b) i c).
-\end{twier}
-Z twierdzenia tego wynika, że funkcja zdefiniowana wzorem (13) jest dystrybuantą zmiennej losowej $X$, a zatem jedno-jednoznacznie odpowiada rozkładowi
-prawdopodobieństwa tej zmiennej.
 
-Z własności c) dystrybuanty wynika, że może ona mieć punkty nieciągłości. Można jednak wykazać, że zbiór tych punktów jest co najwyżej przeliczalny.
+\begin{theorem}
+  Na~to, by~funkcja rzeczywista $F(x)$ była dystrybuantą zmiennej losowej~$X$
+  potrzeba i~wystarcza, aby miała własności~\ref{enum:dist:p1},~\ref{enum:dist:p2}
+  i~\ref{enum:dist:p3}.
+\end{theorem}
+
+Z~twierdzenia tego wynika, że~funkcja zdefiniowana wzorem~\ref{eq:dist} jest
+dystrybuantą zmiennej losowej~$X$, a zatem jedno-jednoznacznie odpowiada
+rozkładowi prawdopodobieństwa tej zmiennej.
+
+Z~własności~\ref{enum:dist:p3} dystrybuanty wynika, że~może ona mieć punkty
+nieciągłości. Można jednak wykazać, że~zbiór tych punktów jest co najwyżej
+przeliczalny.
 
 \subsection{Typy zmiennych losowych}
 Zdefiniujemy obecnie dwa główne typy zmiennej losowej.
-\begin{defin}
-Zmienną losową $X$ nazwiemy \textbf{typu skokowego} (lub \textbf{dyskretną}) jeśli może przyjmować wartości ze zbioru co najwyżej przeliczalnego. Wartości
-te, które oznaczymy przez $x_i, i=1,2,...$, nazywają się \textbf{punktami skokowymi}, a prawdopodobieństwa, z którymi są przyjmowane, i które oznaczymy przez 
-$p_i, i=1,2,...$, nazywają się \textbf{skokami} (lub \textbf{masami}). 
-\end{defin}
-Oczywiście $p_i\geq0, i=1,2,...$, oraz $\sum_{i=1}^{\infty}p_i=1$. Natomiast wzór $P(X=x_i)=p_i,i=1,2,...$ definiuje tzw. \textbf{funkcję prawdopodobieństwa} zmiennej losowej $X$ typu skokowego. Oczywiście funkcja ta w pełni
-charakteryzuje rozkład prawdopodobieństwa zmiennej losowej typu skokowego. Jest również oczywiste, że dystrybuanta zmiennej losowej typu skokowego przyjmuje postać:
-\begin{equation}
-F(x) = P(X<x) = \sum_{x_i<x}p_i
-\end{equation}
-W domu: wykreśl dystrybuantę zmiennej losowej X, opisującej rzut sześcienną kostką do gry (zaznacz punkty nieciągłości).
 
-\begin{defin}
-Zmienną losową $X$ nazwiemy \textbf{typu ciągłego}, jeśli istnieje funkcja rzeczywista $f(x)$ taka, że dla każdego $x$ zachodzi związek:
+\begin{definition}
+  Zmienną losową $X$ nazwiemy \textbf{typu skokowego} (lub~\textbf{dyskretną})
+  jeśli może przyjmować wartości ze~zbioru co~najwyżej przeliczalnego.
+  Wartości~te, które oznaczymy przez $x_i, i=1,2,\dotsc$, nazywają~się
+  \textbf{punktami skokowymi}, a prawdopodobieństwa, z~którymi~są przyjmowane,
+  i~które oznaczymy przez $p_i, i=1,2,\dotsc$, nazywają~się \textbf{skokami}
+  (lub~\textbf{masami}).
+\end{definition}
+
+Oczywiście $p_i\geq0, i=1,2,\dotsc$, oraz $\sum_{i=1}^{\infty}p_i=1$. Natomiast
+wzór $P(X=x_i)=p_i,i=1,2,\dotsc$ definiuje tzw. \textbf{funkcję
+  prawdopodobieństwa} zmiennej losowej~$X$ typu skokowego. Oczywiście funkcja
+ta~w~pełni charakteryzuje rozkład prawdopodobieństwa zmiennej losowej typu
+skokowego. Jest również oczywiste, że dystrybuanta zmiennej losowej typu
+skokowego przyjmuje postać:
+
 \begin{equation}
-F(x)=\int_{-\infty}^{x}f(x)dx
+  F(x) = P(X<x) = \sum_{x_i<x}p_i
 \end{equation}
-gdzie $F(x)$ jest dystrybuantą zmiennej losowej $X$, a całkowanie odbywa się w sensie Lebesgue'a. 
-\end{defin}
+
+W domu: wykreśl dystrybuantę zmiennej losowej X, opisującej rzut sześcienną
+kostką do gry (zaznacz punkty nieciągłości).
+
+\begin{definition}
+  Zmienną losową~$X$ nazwiemy \textbf{typu ciągłego}, jeśli istnieje funkcja
+  rzeczywista $f(x)$ taka, że~dla~każdego $x$ zachodzi związek:
+  \begin{equation}
+    F(x)=\int_{-\infty}^{x}f(x)\dd{x}
+  \end{equation}
+  gdzie $F(x)$ jest dystrybuantą zmiennej losowej $X$, a~całkowanie odbywa~się
+  w~sensie Lebesgue'a.
+\end{definition}
+
 Funkcja $f(x)$ zdefiniowana wyżej nazywa się \textbf{funkcją gęstości
-prawdopodobieństwa} zmiennej losowej $X$ (ang. \textit{probability density function} - PDF), \textbf{gęstością prawdopodobieństwa} lub krótką \textbf{gęstością}.
+prawdopodobieństwa} zmiennej losowej $X$ (ang. \textit{probability density
+function} - PDF), \textbf{gęstością prawdopodobieństwa} lub krótką
+\textbf{gęstością}.
 
 Łatwo zauważyć, że funkcja $f(x)$ spełnia poniższe twierdzenie:
-\begin{twier}
-Funkcja gęstości prawdopodobieństwa zmiennej losowej $X$ ma następujące własności:
-\begin{itemize}
-\item $f(x) \geq 0$
-\item $\int_{-\infty}^\infty f(x)dx = F(+\infty) = 1$
-\end{itemize}
-\end{twier}
+
+\begin{theorem}
+  Funkcja gęstości prawdopodobieństwa zmiennej losowej $X$ ma następujące
+  własności:
+  \begin{itemize}
+    \item $f(x) \geq 0$
+    \item $\int_{-\infty}^\infty f(x)\dd{x} = F(+\infty) = 1$
+  \end{itemize}
+\end{theorem}
+
 Można wykazać, że słuszne jest również twierdzenie odwrotne:
-\begin{twier}
-Każda funkcja rzeczywista $f(x)$ nieujemna, całkowalna na osi $X$ (w sensie Lebesgue'a) i taka, że $\int_{-\infty}^\infty f(x)dx = 1$, jest funkcją gęstości prawdopodobieństwa
-pewnej zmiennej losowej typu ciągłego $X$. 
-\end{twier}
-Widzimy zatem, że funkcja gęstości prawdopodobieństwa w pełni opisuje rozkład prawdopodobieństwa zmiennej losowej typu
-ciągłego.
 
-Podsumowanie:
-\begin{center}
-\begin{tabular}{ccc}
-\underline{Typ skokowy} & ~~~~~~~~~ & \underline{Typ ciągły} \\ \\ 
-$F(x)=\sum_{x_i<x}p_i$ &  & $F(x)=\int_{-\infty}^{x}f(x)dx$ \\ \\ 
-$\bigwedge_i P(X=x_i)=p_i$ & & $f(x)$ \\ 
-\textit{(funkcja prawdopodobieństwa)} & & \textit{(gęstość)}
-\end{tabular}
-\end{center}
+\begin{theorem}
+  Każda funkcja rzeczywista $f(x)$ nieujemna, całkowalna na osi $X$ (w sensie
+  Lebesgue'a) i taka, że $\int_{-\infty}^\infty f(x)\dd{x} = 1$, jest funkcją
+  gęstości prawdopodobieństwa pewnej zmiennej losowej typu ciągłego $X$.
+\end{theorem}
 
-\textbf{Uwaga 1.} Jeśli zmienna losowa nie ma punktów skokowych, to jej dystrybuanta jest funkcją ciągłą. Nie oznacza to jednak, że odpowiada ona zmiennej losowej
-typu ciągłego. Żeby tak było, dystrybuanta musi być funkcją \textbf{absolutnie} (\textbf{bezwzględnie}) \textbf{ciągłą}.
+Widzimy zatem, że funkcja gęstości prawdopodobieństwa w pełni opisuje rozkład
+prawdopodobieństwa zmiennej losowej typu ciągłego.
 
-\textbf{Uwaga 2.} W związku z powyższym, niektórzy autorzy mówią o zmiennych losowych ciągłych, jeśli ich dystrybuanta jest funkcją ciągłą i absolutnie (bezwględnie)
+\begin{table}[ ht ]
+  Podsumowanie:
+  \vspace{0.2cm}
+
+  \begin{minipage}[b]{0.45\linewidth}
+    \begin{center}
+      Zmienna typu skokowego
+      \[
+        F(x) = \sum_{x_i < x} p_i
+      \]
+      \[
+        \bigwedge_i P(X = x_i) = p_i
+      \]
+      (funkcja prawdopodobieństwa)
+    \end{center}
+  \end{minipage}
+  \hspace{0.5cm}
+  \begin{minipage}[b]{0.45\linewidth}
+    \begin{center}
+      Zmienna typu ciągłego
+      \[
+        F(x) = \int_{-\infty}^{x} f(x) \dd{x}
+      \]
+      \[
+        f(x)
+      \]
+      (funkcja gęstości prawdopodobieństwa)
+    \end{center}
+  \end{minipage}
+\end{table}
+
+\Warning Jeśli zmienna losowa nie ma punktów skokowych, to jej
+dystrybuanta jest funkcją ciągłą. Nie oznacza to jednak, że odpowiada ona
+zmiennej losowej typu ciągłego. Żeby tak było, dystrybuanta musi być funkcją
+\textbf{absolutnie} (\textbf{bezwzględnie}) \textbf{ciągłą}.
+
+\Warning W~związku z powyższym, niektórzy autorzy mówią o zmiennych losowych
+ciągłych, jeśli ich dystrybuanta jest funkcją ciągłą i absolutnie (bezwględnie)
 ciągłych, jeśli ich dystrybuanta jest funkcją absolutnie ciągłą.
 
+
+
 \lecture{03.11.2008}
-Z teorii całki Lebesgue'a w $R^1$ wynika, że
-\[f(x) = \frac{dF(x)}{dx}\]
-dla prawie wszyskich $x$ (czyli z wyjątkiem zbioru miary Lebesgue'a równej 0), w szczególności dla każdego $x$, dla którego $f(x)$ jest ciągła. Zauważmy jeszcze, że jeśli
-zmienna losowa $X$ jest typu ciągłego, to
-\[P(a\leq X \leq b) = F(b)-F(a)=\int_a^bf(x)dx\]
-Ponadto, jeśli $x_0$ jest punktem, dla którego istnieje funkcja gęstości $f(x)$, to
-\[  P(X=x_o)=\int_{x_0}^{x_0}f(x)dx = 0  \]
-(ciągle zakładamy, że zmienna losowa $X$ jest typu ciągłego). Mimo, że $x_0$ jest możliwą wartością zmiennej losowej $X$, czyli odpowiada mu zdarzenie elementarne.
-Zatem z tego, że prawdopodobieństwo zdarzenia związanego ze zmienną losową typu \textbf{ciągłego} równa się $0$ nie wynika, że jest to zdarzenie niemożliwe. Zdarzenie takie uznajemy za \textbf{bardzo mało prawdopodobne}. Analogicznie 
-\[P(X\neq x_0)=1\]
-mimo że nie jest to zdarzenie pewne; mówimy o takim zdarzeniu, że zachodzi ono \textbf{prawie na pewno}.
+
+Z~teorii całki Lebesgue'a w~$\mathbb{R}^1$ wynika, że
+\[
+  f(x) = \frac{dF(x)}{dx}
+\]
+dla~prawie wszyskich $x$ (czyli z wyjątkiem zbioru miary Lebesgue'a równej $0$),
+w~szczególności dla~każdego $x$, dla~którego $f(x)$ jest ciągła. Zauważmy
+jeszcze, że jeśli zmienna losowa $X$ jest typu ciągłego, to
+\[
+  P(a\leq X \leq b) = F(b) - F(a) = \int_a^b f(x) \dd{x}
+\]
+Ponadto, jeśli $x_0$ jest punktem, dla którego istnieje funkcja gęstości $f(x)$,
+to
+\[
+  P(X = x_o) = \int_{x_0}^{x_0} f(x) \dd{x} = 0
+\]
+(ciągle zakładamy, że zmienna losowa $X$ jest typu ciągłego). Mimo, że $x_0$
+jest możliwą wartością zmiennej losowej $X$, czyli odpowiada mu zdarzenie
+elementarne. Zatem z tego, że prawdopodobieństwo zdarzenia związanego ze zmienną
+losową typu \textbf{ciągłego} równa się $0$ nie wynika, że jest to zdarzenie
+niemożliwe. Zdarzenie takie uznajemy za \textbf{bardzo mało prawdopodobne}.
+Analogicznie
+\[
+  P(X \neq x_0) = 1
+\]
+mimo że nie jest to zdarzenie pewne; mówimy o takim zdarzeniu, że zachodzi
+ono \textbf{prawie na pewno}.
 
 \subsection{Parametry rozkładu zmiennej losowej}
-Jak pamiętamy, \textbf{pełną} charakterystykę \textbf{dowolnej} zmiennej losowej stanowi jej rozkład prawdopodobieństwa i odpowiadająca mu jedno-jednoznacznie dystrybuanta.
-Wiemy także, że w~przypadku zmiennej losowej typu skokowego jej pełną charakterystykę stanowi również funkcja gęstości, a dla zmiennej losowej typu ciągłego funkcja gęstości.
-W wielu sytuacjach praktycznych  wystarczy znajomość pewnych prostszych parametrów rozkładu prawdopodobieństwa zmiennej losowej.
+Jak pamiętamy, \textbf{pełną} charakterystykę \textbf{dowolnej} zmiennej losowej
+stanowi jej rozkład prawdopodobieństwa i odpowiadająca mu jedno-jednoznacznie
+dystrybuanta. Wiemy także, że w~przypadku zmiennej losowej typu skokowego jej
+pełną charakterystykę stanowi również funkcja gęstości, a dla zmiennej losowej
+typu ciągłego funkcja gęstości.  W wielu sytuacjach praktycznych wystarczy
+znajomość pewnych prostszych parametrów rozkładu prawdopodobieństwa zmiennej
+losowej.
 
-Poniżej omówimy dwie grupy takich parametrów, mianowicie momenty i parametry pozycyjne.
-\begin{defin}
-Wyrażenie
-\begin{eqnarray}
-E(X-c)^l & = & \int_{-\infty}^{\infty}(x-c)^ldF(x) = \\
-\nonumber
-& = & \left\{ \begin{array}{ll}
-\sum_i(x_i-c)^lp_i & \textrm{, gdy $X$ jest typu skokowego}\\ \\
-\int_{-\infty}^{\infty}(x-c)^lf(x)dx & \textrm{, gdy $X$ jest typu ciągłego}
-\end{array} \right.
-\end{eqnarray}
-nazywamy \textbf{momentem rzędu $l$ względem punktu $c$} ($c \in \mathbb{R}$) zmiennej losowej $X$.
-\end{defin}
-Jeśli $c=0$, to mówimy o \textbf{momencie zwykłym} rzędu $l$ zmiennej losowej $X$. Dla $l=1$ otrzymujemy tzw. \textbf{wartość średnią} (\textbf{oczekiwaną}, 
-\textbf{nadzieję matematyczną}) zmiennej losowej $X$.
+Poniżej omówimy dwie grupy takich parametrów, mianowicie momenty i~parametry
+pozycyjne.
+
+\begin{definition}
+  Wyrażenie
+  \begin{eqnarray}
+    E(X-c)^l &= & \int_{-\infty}^{\infty}(x-c)^l\dd{F(x)} = \\
+    \nonumber
+    &= & \begin{cases}
+      \sum_i(x_i-c)^lp_i & \textrm{, gdy $X$ jest typu skokowego} \\
+      \int_{-\infty}^{\infty}(x-c)^lf(x)\dd{x} & \textrm{, gdy $X$ jest typu ciągłego}
+    \end{cases}
+  \end{eqnarray}
+  nazywamy \textbf{momentem rzędu $l$ względem punktu $c$} ($c \in \mathbb{R}$)
+  zmiennej losowej $X$.
+\end{definition}
+
+Jeśli $c=0$, to mówimy o \textbf{momencie zwykłym} rzędu $l$ zmiennej
+losowej~$X$. Dla~$l=1$ otrzymujemy tzw.~\textbf{wartość średnią}
+(\textbf{oczekiwaną}, \textbf{nadzieję matematyczną}) zmiennej losowej $X$.
 
 Zatem:
+
 \begin{eqnarray}
-m_1 = m = E(X) & = & \int_{-\infty}^{\infty}xdF(x) = \\
-\nonumber
-& = & \left\{ \begin{array}{ll}
-\sum_ix_ip_i & \textrm{, gdy $X$ jest typu skokowego}\\ \\
-\int_{-\infty}^{\infty}xf(x)dx & \textrm{, gdy $X$ jest typu ciągłego}
-\end{array} \right.
+  m_1 = m = E(X) & = & \int_{-\infty}^{\infty}x\dd{F(x)} = \\
+  \nonumber
+  & = & \begin{cases}
+    \sum_ix_ip_i & \textrm{, gdy $X$ jest typu skokowego}\\
+    \int_{-\infty}^{\infty}xf(x)\dd{x} & \textrm{, gdy $X$ jest typu ciągłego}
+  \end{cases}
 \end{eqnarray}
+
 Bezpośrednio z definicji wartości średniej wynika następujące twierdzenie:
-\begin{twier}
-Wartość średnia (uśredniona po zbiorze) ma następujące własności:
-\begin{enumerate}
-\item[a)] $E(C) = c$, gdzie $C$ jest zmienną losową przyjmującą wartość $c$ z prawdopodobieństwem równym 1
-\item[b)] $E(cX) = cE(X)$
-\item[c)] $E(X+Y) = E(X) + E(Y)$
-\end{enumerate}
-\end{twier}
 
-Ważne znaczenie mają momenty względem punktu  $c=m$, zwane momentami centralnymi i~oznaczane przez $\mu$.
-\begin{defin}
-\textbf{Moment centralny rzędu $l$, $\mu_l$,} wyraża się wzorem:
-\begin{equation}
-\mu_l = E(X-m)^l
-\end{equation}
-\end{defin}
-Oczywiście $\mu_1 = 0$; natomiast $\mu_2$ nazywamy \textbf{wariancją} (albo \textbf{dyspersją}) zmiennej losowej $X$ i oznaczamy na ogół przez $\mathscr{D}^2(X)$ lub
-$\sigma_{(*)}^2$.
+\begin{theorem}
+  Wartość średnia (uśredniona po zbiorze) ma następujące własności:
+  \begin{enumerate}
+    \item[a)] $E(C) = c$, gdzie $C$ jest zmienną losową przyjmującą wartość $c$
+      z~prawdopodobieństwem równym 1
+    \item[b)] $E(cX) = cE(X)$
+    \item[c)] $E(X+Y) = E(X) + E(Y)$
+  \end{enumerate}
+\end{theorem}
 
-Łatwo zauważyć, że wariancja jest miarą rozproszenia wartości zmiennej losowej $X$ wokół jej  wartości średniej.
+Ważne znaczenie mają momenty względem punktu  $c=m$, zwane momentami centralnymi
+i~oznaczane przez $\mu$.
 
-Pierwiastek kwadratowy z wariancji, $\mathscr{D}(X)$ lub $\sigma_{(*)}$ nazywamy \textbf{odchyleniem standardowym (dewiacją)}. Łatwo wykazać następujące twierdzenie:
-\begin{twier}
-Wariancja $\mathscr{D}^2(X)$ ma następujące własności:
-\begin{enumerate}
-\item[a)] $\mathscr{D}^2(X+c) = \mathscr{D}^2{(X)}$
-\item[b)] $\mathscr{D}^2(X) = E(X^2) - E^2(X)~~~~~~~~(=m_2-m^2)$
-\item[c)] $\bigwedge_{c\neq m}\mathscr{D}^2(X)<E(X-c)^2$
-\item[d)] Jeżeli wariancja jest skończona, a więc $\mathscr{D}^2(X)<\infty$, to dla każdego $\epsilon > 0$:
-\[P\left\{\omega:|X(\omega)-m|\geq \epsilon\right\}\leq \frac{\sigma^2}{\epsilon^2}.\]
-Jest to nierówność \textbf{Czebyszewa} (lub $\epsilon = t\sigma$).
-\end{enumerate}
-\end{twier}
-W domu: udowodnić punkty a), b) i c) powyższego twierdzenia (obowiązuje na egzaminie).
+\begin{definition}
+  \textbf{Moment centralny rzędu $l$, $\mu_l$,} wyraża~się wzorem:
+  \begin{equation}
+    \mu_l = E(X-m)^l
+  \end{equation}
+\end{definition}
+
+Oczywiście $\mu_1 = 0$; natomiast $\mu_2$ nazywamy \textbf{wariancją} (albo
+\textbf{dyspersją}) zmiennej losowej $X$ i~oznaczamy na~ogół przez
+$\mathscr{D}^2(X)$ lub~$\sigma_{(*)}^2$.
+
+Łatwo zauważyć, że wariancja jest miarą rozproszenia wartości zmiennej
+losowej $X$ wokół jej  wartości średniej.
+
+Pierwiastek kwadratowy z wariancji, $\mathscr{D}(X)$ lub $\sigma_{(*)}$ nazywamy
+\textbf{odchyleniem standardowym (dewiacją)}. Łatwo wykazać następujące
+twierdzenie:
+
+\begin{theorem}
+  Wariancja $\mathscr{D}^2(X)$ ma następujące własności:
+  \begin{enumerate}
+    \item[a)] $\mathscr{D}^2(X+c) = \mathscr{D}^2{(X)}$
+    \item[b)] $\mathscr{D}^2(X) = E(X^2) - E^2(X)\;\;(=m_2-m^2)$
+    \item[c)] $\bigwedge_{c\neq m}\mathscr{D}^2(X)<E(X-c)^2$
+    \item[d)] Jeżeli wariancja jest skończona, a więc $\mathscr{D}^2(X)<\infty$,
+      to dla każdego $\epsilon > 0$:
+      \[
+        P\left\{\omega:|X(\omega)-m|\geq \epsilon\right\}\leq
+        \frac{\sigma^2}{\epsilon^2}.
+      \]
+      Jest to nierówność \textbf{Czebyszewa} (lub $\epsilon = t\sigma$).
+  \end{enumerate}
+\end{theorem}
+
+W domu: udowodnić punkty a), b) i c) powyższego twierdzenia (obowiązuje na
+egzaminie).
 
 Zauważmy, że z własności b) wynika, że
-\[\mathscr{D}^2(C) = 0,~~\mathscr{D}^2(cX) = c^2\mathscr{D}^2(X)\] 
+\[
+  \mathscr{D}^2(C) = 0,\;\mathscr{D}^2(cX) = c^2\mathscr{D}^2(X)
+\]
 Często wykorzystuje się pojęcie zmiennej losowej unormowanej.
-\begin{defin}
+\begin{definition}
 Mówimy, że zmienna losowa $X$ jest \textbf{unormowana (standaryzowana)}, jeśli
 \[E(X) = 0 \textrm{~~i~~} \mathscr{D}^2(X)=1\] 
-\end{defin}
+\end{definition}
 Łatwo wykazać następujące twierdzenie:
-\begin{twier}
+\begin{theorem}
 Dla dowolnej zmiennej losowej $X$, zmienna losowa $Y$ dana wzorem
 \[Y=\frac{X-E(X)}{\mathscr{D}(X)}\]
 jest unormowana.
-\end{twier}
+\end{theorem}
 Dowód: \textbf{TODO}
 
 Przejdźmy teraz do zdefiniowania głównych parametrów pozycyjnych.
-\begin{defin}
+\begin{definition}
 \textbf{Wartością modalną} zmiennej losowej $X$ nazywamy punkt, w którym maksimum osiąga:
 \begin{itemize}
 \item funkcja prawdopodobieństwa, gdy $X$ jest typu skokowego;
 \item funkcja gęstości, gdy $X$ jest typu ciągłego.
 \end{itemize}
-\end{defin}
+\end{definition}
 Widzimy zatem, że zmienna losowa może mieć jedną wartość modalną, wiele takich wartości, lub w ogóle nie posiadać wartości modalnej.
-\begin{defin}
+\begin{definition}
 Wartość $x_p$ spełniającą dla każdego $p$, $0<p<1$, nierówności:
 \[P(X\leq x_p)\geq p\]
 \[P(X\geq x_p)\geq 1-p\]
 nazywamy \textbf{kwantylem rzędu $p$} zmiennej losowej $X$.
-\end{defin}
+\end{definition}
 Kwantyl rzędu $0,5$ ($x_{0,5}$ lub $x_{1/2}$) nazywamy \textbf{medianą}, a kwantyle rzędu $0,25$, $0,75$ nazywamy \textbf{kwartylami}.
 Zauważmy, że mediana istnieje dla dowolnej zmiennej losowej, podczas gdy wartość średnia może nie istnieć (odpowiednia całka lub suma dąży do nieskończoności).
 \subsection{Wielowymiarowe zmienne losowe}
-\begin{defin}
+\begin{definition}
 Układ $n$ funkcji rzeczywistych $(X_1,X_2,...,X_n)$ określony na $\Omega$ nazywamy \textbf{$n$\dywiz wymiarową (lub łączną) zmienną losową} (lub \textbf{wektorem losowym}) jeśli przeciwobraz każdego zbioru borelowskiego w $R^n$ otrzymany za pomocą tego układu jest zdarzeniem losowym.
-\end{defin}
+\end{definition}
 Inaczej mówiąc $n$-wymiarowa zmienna losowa to odwzorowanie 
 \[(X_1,X_2,...,X_n):\Omega~\textrm{w}~R^n\]
 mierzalne względem miary probabilistycznej $P$.
 
 Rozkład prawdopodobieństwa i dystrybuantę zmiennej losowej $n$\dywiz wymiarowej definiujemy analogiczne jak dla zmienej losowej jednowymiarowej. Podajmy definicję
 dystrybuanty:
-\begin{defin}
+\begin{definition}
 Funkcję rzeczywistą  określoną w $R^n$ wzorem (przecinek oznacza koniunkcję!):
 \[F(x_1,x_2,...,x_n) = P(X_1<x_1,X_2<x_2,...,X_n<x_n)\]
 nazywamy \textbf{$n$-wymiarową (łączną) dystrybuantą} wektora losowego $(X_1,X_2,...,X_n)$.
-\end{defin}
+\end{definition}
 W dalszym ciągu zajmiemy się zmienną losową dwuwymiarową $(X,Y)$, o łącznej dystrybuancie:
 \[F(x,y) = P(X<x, Y<y).\]
 Łatwo zauważyć, że dystrybuanta $F(x,y)$ jest względem każdego argumentu funkcją nieujemną, niemalejącą i przynajmniej lewostronnie ciągłą, oraz:
@@ -652,10 +984,10 @@ F(x_2,y_2)-F(x_2, y_1) - F(x_1, y_2) + F(x_1, y_1) \geq 0
 Wynika to z faktu, iż prawdopodobieństwo tego, że zmienna losowa $(X,Y)$ przyjmie wartość należącą do prostokąta $(x_1\leq X\leq x_2, y_1\leq Y\leq y_2)$ musi być nieujemne.
 
 Zdefiniujmy zmiennej losowe dwuwymiarowe typu skokowego i typu ciągłego.
-\begin{defin}
+\begin{definition}
 Zmienną losową $(X,Y)$ nazywamy typu skokowego (lub dyskretną), jeśli może przyjmować co najwyżej przeliczalną liczbę par $(x_i, y_k)$ zwanych \textbf{punktami skokowymi}
 z prawdopodobieństwami $p_{ik}$ zwanymi \textbf{skokami (masami)}.
-\end{defin}
+\end{definition}
 \lecture{17.11.2008}
 Oczywiście:
 \[\bigwedge_{i,k}p_{ik}\geq 0, \sum_k\sum_ip_{ik}=1\]
@@ -666,14 +998,14 @@ natomiast postać:
 \begin{equation}
 F(x,y) = \sum_{x_i<x}\sum_{y_k<y}p_{ik}
 \end{equation}
-\begin{defin}
+\begin{definition}
 Zmienną losową $(X,Y)$ nazwiemy \textbf{typu ciągłego}, jeśli dystrybuanta $F(x,y)$ jest funkcją absolutnie (bezwzględnie) ciągłą, tzn. istnieje taka funkcja rzeczywista
 $f(x,y)$, że dla każdego $(x,y)\in\mathbb{R}^2$ zachodzi:
 \begin{equation}
-F(x,y)=\int_{-\infty}^y\int_{-\infty}^xf(x,y)dxdy
+F(x,y)=\int_{-\infty}^y\int_{-\infty}^xf(x,y)\dd{x}\dd{y}
 \end{equation}
 gdzie całkowanie odbywa się w sensie Lebesgue'a.
-\end{defin}
+\end{definition}
 Funkcja $f(x,y)$ nazywa się \textbf{dwuwymiarową (łączną) funkcją gęstości prawdopodobieństwa} zmiennej losowej $(X,Y)$ typu ciągłego.
 
 Z teorii całki Lebesgue'a w $\mathbb{R}^n$ wynika, że dla prawie wszystkich $(x,y)\in\mathbb{R}^2$ (z wyjątkiem zbioru miary Lebesgue'a równej 0), w szczególności w każdym
@@ -691,9 +1023,9 @@ Powyższe wzory definiują funkcję prawdopodobieństwa rozkładu brzegowego odp
 skokowego $(X,Y)$.
 
 Jeżeli natomiast zmienna losowa $(X,Y)$ jest typu ciągłego, to funkcja gęstości rozkładu brzegowego zmiennej losowej $X$ wyraża się wzorem:
-\[f_1(x) = \int_{-\infty}^{\infty}f(x,y)dy.\]
+\[f_1(x) = \int_{-\infty}^{\infty}f(x,y)\dd{y}.\]
 Natomiast funkcja gęstości rozkładu brzegowego zmiennej losowej $Y$ wyraża się wzorem:
-\[f_2(y) = \int_{-\infty}^{\infty}f(x,y)dx.\]
+\[f_2(y) = \int_{-\infty}^{\infty}f(x,y)\dd{x}.\]
 Ogólnie dla zmiennej losowej $(X,Y)$ dystrybuanta rozkładu brzegowego zmiennej losowej $X$ dana jest wzorem:
 \[F_1(x) = F(x,\infty) = P(X<x,Y<\infty),\]
 natomiast dystrybuanta rozkładu brzegowego zmiennej losowej $Y$ wyraża się wzorem:
@@ -701,7 +1033,7 @@ natomiast dystrybuanta rozkładu brzegowego zmiennej losowej $Y$ wyraża się wz
 W szczególności, jeśli zmienna losowa $(X,Y)$ jest typu skokowego, to np.:
 \[F_1(x) = \sum_{x_i<x}p_{i\cdot}=\sum_{x_i<x}\sum_kp_{ik}.\]
 Jesli natomiast zmienna losowa $(X,Y)$ jest typu ciągłego, to np.:
-\[F_1(x) = \int_{-\infty}^xf_1(x)dx = \int_{-\infty}^x\int_{-\infty}^{\infty}f(x,y)dydx.\]
+\[F_1(x) = \int_{-\infty}^xf_1(x)\dd{x} = \int_{-\infty}^x\int_{-\infty}^{\infty}f(x,y)\dd{y}\dd{x}.\]
 Ważnym zagadnieniem są \textbf{rozkłady warunkowe}, np. zmiennej losowej $Y$ pod warunkiem, że zmienna losowa $X$ przyjmie ustaloną wartość. 
 
 Jeśli zmienna losowa $(X,Y)$ jest typu skokowego, to \textbf{dystrybuanta warunkowa} zmiennej losowej $Y$, pod warunkiem, że $X=x_i$, wyraża się wzorem:
@@ -716,38 +1048,38 @@ P(y_k|x_i) & = & P(Y=y_k|X=x_i) = \frac{P(Y=y_k,X=x_i)}{P(X=x_i)} = \\\nonumber
 Jeśli natomiast zmienna losowa $(X,Y)$ jest typu ciągłego, to, przy pewnych założeniach dotyczących granicy, dystrybuanta warunkowa zmiennej losowej $Y$ pod warunkiem,
 że $X=x$ wyraża się wzorem:
 \begin{equation}
-F(y|x)=\int_{-\infty}^yf(y|x)dy,
+F(y|x)=\int_{-\infty}^yf(y|x)\dd{y},
 \end{equation}
 gdzie $f(y|x)$ jest \textbf{warunkową funkcją gęstości} zmiennej losowej $Y$, wyrażającą się wzorem:
 \begin{equation}
 f(y|x) = \frac{f(x,y)}{f_1(x)},~f_1(x) > 0.
 \end{equation}
 Widzimy zatem, że:
-\[F(y|x)f_1(x) = \int_{-\infty}^yf(x,y)dy~~~~~~~/\textrm{całkujemy}\int_{-\infty}^{\infty}\]
+\[F(y|x)f_1(x) = \int_{-\infty}^yf(x,y)\d{y}~~~~~~~/\textrm{całkujemy}\int_{-\infty}^{\infty}\]
 czyli:
 \begin{eqnarray}
-\nonumber \int_{-\infty}^{\infty}F(y|x)f_1(x)dx & = & \int_{-\infty}^{\infty}\int_{-\infty}^yf(x,y)dydx\\
-\nonumber & = & \int_{-\infty}^y\int_{-\infty}^{\infty}f(x,y)dxdy = F_2(y)
+\nonumber \int_{-\infty}^{\infty}F(y|x)f_1(x)\dd{x} & = & \int_{-\infty}^{\infty}\int_{-\infty}^yf(x,y)\dd{y}\dd{x}\\
+\nonumber & = & \int_{-\infty}^y\int_{-\infty}^{\infty}f(x,y)\dd{x}\dd{y} = F_2(y)
 \end{eqnarray}
 Powyższy wzór stanowi uogólnienie twierdzenia o prawdopodobieństwie całkowitym na zmienne losowe typu ciągłego, czyli na nieprzeliczalną liczbę zdarzeń losowych.
 
 Mając dane rozkłady warunkowe, możemy zdefiniować \textbf{momenty warunkowe}; przykładowo \textbf{warunkową wartość średnią} zmiennej losowej $Y$, pod warunkiem, że $X=x$
  (lub $X=x_i$ dla zmiennej losowej typu skokowego; jest to zapis ogólny) definiujemy ogólnie jako całkę Stieltjesa:
 \begin{eqnarray}
-E(Y|X=x) & = & \int_{-\infty}^{\infty}ydF(y|x) = \\
+E(Y|X=x) & = & \int_{-\infty}^{\infty}y\dd{F(y|x)} = \\
 \nonumber
 & = & \left\{ \begin{array}{ll}
 \sum_ky_kP(y_k|x_i) & \textrm{gdy $(X,Y)$ jest typu skokowego}\\ \\
-\int_{-\infty}^{\infty}yf(y|x)dy & \textrm{gdy $(X,Y)$ jest typu ciągłego}
+\int_{-\infty}^{\infty}yf(y|x)\dd{y} & \textrm{gdy $(X,Y)$ jest typu ciągłego}
 \end{array} \right.
 \end{eqnarray}
 (zakładamy, że $f_1(x)>0$). Zauważmy, że słuszny jest wzór:
 \begin{eqnarray}
-E(Y) & = & \int_{-\infty}^{\infty}E(Y|X=x)dF_1(x) = \\
+E(Y) & = & \int_{-\infty}^{\infty}E(Y|X=x)\dd{F_1(x)} = \\
 \nonumber
 & = & \left\{ \begin{array}{ll}
 \sum_iE(Y|X=x_i)P(X=x_i) & \textrm{, gdy $(X,Y)$ jest typu skokowego}\\ \\
-\int_{-\infty}^{\infty}E(Y|X=x)f_1(x)dx & \textrm{, gdy $(X,Y)$ jest typu ciągłego}
+\int_{-\infty}^{\infty}E(Y|X=x)f_1(x)\dd{x} & \textrm{, gdy $(X,Y)$ jest typu ciągłego}
 \end{array} \right.
 \end{eqnarray}
 Ogólnie, jeśli chcemy wyliczyć jakiś moment rozkładu zmiennej losowej np. $Y$, która zależy od zmiennej losowej $X$, to postępujemy dwuetapowo: 
@@ -756,14 +1088,14 @@ Ogólnie, jeśli chcemy wyliczyć jakiś moment rozkładu zmiennej losowej np. $
 \item[\textbf{2)}] uśredniamy otrzymany wynik po rozkładzie brzegowym zmiennej losowej $X$, czyli wyliczamy całkę Stieltjesa z tego wyniku względem dystrybuanty $F_1(x)$.
 \end{enumerate}
 Przejdźmy obecnie do pojęć związanych z niezależnością zmiennych losowych.
-\begin{defin}
+\begin{definition}
 Mówimy, że zmienne losowe $X$ i $Y$ są \textbf{niezależne}, jeśli dla dowolnych zbiorów borelowskich $S_1,S_2$ odpowiednio na osi $x$ i $y$, zdarzenia \\
 $Z_1=\{\omega:X(\omega)\in S_1\}, Z_2=\{\omega:Y(\omega)\in S_2\}$ spełniają relację:
 \begin{equation}
 P(Z_1\cap Z_2) = P(Z_1)\cdot P(Z_2)
 \end{equation}
 czyli są \textbf{zdarzeniami niezależnymi}.
-\end{defin}
+\end{definition}
 Łatwo zauważyć, że powyższa relacja zachodzi wtw, gdy dla każdego $(x,y)\in\mathbb{R}^2$ prawdziwy jest warunek:
 \[F(x,y)=F_1(x)\cdot F_2(y).\]
 W związku z powyższym, niektórzy autorzy podają ten warunek jako definicję niezależności zmiennych losowych $X$ i $Y$.
@@ -775,25 +1107,25 @@ Natomiast dla zmiennych losowych typu ciągłego w postaci:
 Zauważmy również, że jeśli $X$ i $Y$ są niezależne, to:
 \[F(x|y) = F_1(x),~F(y|x)=F_2(y)\]
 Uogólnimy obecnie definicję niezależności zmiennej losowej dla $n>2$.
-\begin{defin}
+\begin{definition}
 Mówimy, że zmienne losowe $X_1,X_2,...,X_n$ są \textbf{niezależne}, jeśli dla dowolnych zbiorów borelowskich $S_1,S_2,...,S_n$ odpowiednio na osi $x_1,x_2,...,x_n$, 
 zdarzenia $Z_i=\{\omega:X_i(\omega)\in S_i\},~i=1,2,...,n$ spełniają relację:
 \begin{equation}
 P(Z_1\cap Z_2 \cap ...\cap Z_n) = P(Z_1)\cdot P(Z_2) \cdot ... \cdot P(Z_n). 
 \end{equation}
-\end{defin}
+\end{definition}
 Łatwo zauważyć, że powyższa relacja zachodzi wtw, gdy dla dowolnego\\ $(x_1,x_2,...,x_n)\in\mathbb{R}^n$ zachodzi równość:
 \[F(x_1,x_2,...,x_n)=F(x_1)\cdot F(x_2)\cdot...\cdot F(x_n).\]
-\begin{defin}
+\begin{definition}
 Mówimy, że ciąg zmiennych losowych $X_1,X_2,...$ jest \textbf{ciągiem zmiennych losowych niezależnych}, jesli dla dowolnego $n$ zmienne losowe $X_1,X_2,...,X_n$ 
 są niezależne.
-\end{defin}
+\end{definition}
 \lecture{24.11.2008}
 Wykażemy teraz dwa ważne twierdzenia.
-\begin{twier}
+\begin{theorem}
 Wartość średnia iloczynu dowolnej skończonej liczby niezależnych zmiennych losowych o skończonych wartościach średnich równa się iloczynowi
 wartości średnich tych zmiennych.
-\end{twier}
+\end{theorem}
 \textbf{Dowód}. Dla $n=2$ (dla $n>2$ dowód zachodzi przez indukcję).
 Niech $X, Y$ będą niezależnymi zmiennymi losowymi typu skokowego. Wówczas:
 \begin{eqnarray}
@@ -806,12 +1138,12 @@ Zakładając, że zmienne losowe $X, Y$ są typu ciągłego, otrzymujemy:
 \nonumber &=& \int_{-\infty}^\infty xf_1(x)dx\cdot\int_{-\infty}^\infty yf_2(y)dy = E(X)\cdot E(Y)
 \end{eqnarray}
 $\circledcirc\Longrightarrow$ patrz koniec punktu 6.
-\begin{twier}
+\begin{theorem}
 Wariancja sumy dowolnej skończonej liczby niezależnych zmiennych losowych o skończonych wariancjach jest równa sumie wariancji tych zmiennych.
-\end{twier}
+\end{theorem}
 \textbf{Dowód}. (TODO dla $n=2$; dla $n>2$ dowód zachodzi przez indukcję).\newline\\
 Zdefiniujemy obecnie podstawowe momenty zmiennej losowej $(X, Y)$.
-\begin{defin}
+\begin{definition}
 \textbf{Momentem zwykłym rzędu} $l+n$ zmiennej losowej $(X, Y)$ nazywamy wyrażenie:
 \begin{eqnarray}
 m_{ln} &=& E(X^lY^n) = \int_{-\infty}^\infty\int_{-\infty}^\infty x^ly^ndF(x,y) = \\\nonumber
@@ -820,7 +1152,7 @@ m_{ln} &=& E(X^lY^n) = \int_{-\infty}^\infty\int_{-\infty}^\infty x^ly^ndF(x,y) 
 \int_{-\infty}^\infty\int_{-\infty}^\infty x^ly^nf(x,y)dxdy& \textrm{gdy $(X,Y)$ jest typu ciągłego} 
 \end{array}\right.
 \end{eqnarray} 
-\end{defin}
+\end{definition}
 Ogólnie mogą istnieć dwa momenty rzędu pierwszego, tu:
 \[m_{10} = E(X)\]
 \[m_{01} = E(Y)\]
@@ -829,12 +1161,12 @@ trzy momenty rzędu drugiego, tu:
 \[m_{11} = E(XY)\]
 \[m_{02} = E(Y^2)\]
 itd.
-\begin{defin}
+\begin{definition}
 \textbf{Momentem centralnym rzędu} $l+n$ zmiennej losowej $(X,Y)$ nazywamy wyrażenie:
 \begin{equation}
 \mu_{ln} = E[(X-m_{10})^l(Y-m_{01})^n]
 \end{equation}
-\end{defin}
+\end{definition}
 Łatwo zauważyć, że:
 \[\mu_{10} = E(X-m_{10}) = 0 = \mu_{01} = E(Y-m_{01}) \]
 \[\mu_{20} = E(X-m_{10})^2 = \sigma_X^2\]
@@ -843,13 +1175,13 @@ Natomiast moment centralny $\mu_{11}$ nazywamy \textbf{kowariancją} zmiennej lo
 Zatem:
 \[\mu_{11} = k_{XY} = cov(X,Y) = E[(X-m_{10})(Y-m_{01})]\]
 Z twierdzenia 2.7, jeśli zmienne losowe $X$ i $Y$ są niezależne, to $\mu_{11} = 0$. Twierdzenie odwrotne nie jest prawdziwe.
-\begin{defin}
+\begin{definition}
 Jeśli dla zmiennych losowych $X, Y$ istnieją $\sigma_X$ i $\sigma_Y$, to wyrażenie
 \begin{equation}
 \rho_{XY} = \frac{k_{XY}}{\sigma_X\sigma_Y}
 \end{equation}
 nazywamy \textbf{współczynnikiem korelacji} zmiennych losowych $X$ i $Y$.
-\end{defin}
+\end{definition}
 Łatwo wykazać, że $-1\leq \rho_{XY} \leq 1$. Jeśli dla zmiennych losowych $X$ i $Y$ $\rho_{XY} = 0$, to mówimy, że zmienne te są
 \textbf{nieskorelowane}.
 Z twierdzenia 2.7 widzimy, że jeśli zmienne losowe są niezależne, to są również nieskorelowane, ale nie odwrotnie. Definicję momentu 
@@ -860,7 +1192,7 @@ k_{ij}=E[(X_i-m_i)(X_j-m_j)],~~~i,j=1,2,...,n, i\neq j
 \end{equation}
 gdzie $m_i = E(X_i), m_j = E(X_j)$.
 Dla $i=j$ otrzymujemy oczywiście wariancję poszczególnych zmiennych.
-\begin{defin}
+\begin{definition}
 Macierz 
 \begin{equation}
 K = \left[ \begin{array}{llll}
@@ -871,7 +1203,7 @@ k_{n1} & k_{n2} & \ldots &k_{nn} \\
 \end{array} \right]
 \end{equation}
 nazywamy \textbf{macierzą korelacyjną} wektora losowego $(X_1,X_2,\ldots,X_n)$ (oczywiście macierz ta jest symetryczna, $k_{ij}=k_{ji}$).
-\end{defin}
+\end{definition}
 \subsection{Funkcje charakterystyczne}
 Jednym z ważnych problemów jest sumowanie niezależnych zmiennych losowych, o którym będziemy mówili w punkcie 8 (twierdzenia graniczne).
 Wyznaczenie rozkładu prawdopodobieństwa sumy zmiennych losowych, także niezależnych, jest rachunkowo skomplikowane; żeby je uprościć opracowano
@@ -884,22 +1216,22 @@ losowych odpowiada iloczyn tych funkcji. Klasy funkcji o tej własności to:
 \item funkcje charakterystyczne
 \end{itemize}
 W dalszym ciągu omówimy tylko te ostatnie jako najogólniejsze.
-\begin{defin}
+\begin{definition}
 \textbf{Funkcją charakterystyczną} zmiennej losowej $X$ o dystrybuancie $F(x)$ nazywamy funkcję zespoloną zmiennej rzeczywistej $t$, daną wzorem:
 \begin{equation}
 \phi_t = E(e^{itX}) = \int_{-\infty}^{\infty}e^{itx}dF(x)
 \end{equation}
-\end{defin}
+\end{definition}
 Jako, że
 \[ \bigwedge_{x,t}|e^{itx}| = 1 \]
 stąd powyższa całka istnieje dla dowolnej zmiennej losowej X.
 Łatwo wykazać następujące twierdzenie:
-\begin{twier}
+\begin{theorem}
 Jeśli $X, Y$ są niezależnymi zmiennymi losowymi o dystrybuantach $F(x), F(y)$, to:
 \begin{equation}
 \phi_{X+Y}(t) = \phi_X(t)\cdot\phi_Y(t)
 \end{equation}
-\end{twier}
+\end{theorem}
 \textbf{Dowód}. TODO\\
 Można wykazać, że zachodzi następujący związek pomiędzy funkcją charakterystyczną zmiennej losowej $X$ a jej momentami:
 \begin{equation}
@@ -911,12 +1243,12 @@ Definicję funkcji charakterystycznej uogólnia się w sposób naturalny na $n>2
 \end{equation}
 \subsection{Przykładowe rozkłady prawdopodobieństwa}
 \subsubsection{Rozkład jednopunktowy}
-\begin{defin}
+\begin{definition}
 Mówimy, że zmienna losowa $X$ ma \textbf{rozkład jednopunktowy} jeśli istnieje taki punkt $x_0$, że:
 \begin{equation}
 P(X=x_0) = 1
 \end{equation}
-\end{defin}
+\end{definition}
 Widzimy zatem, że cała masa zmiennej losowej o rozkładzie jednopunktowym skupiona jest w punkcie $x_0$. Oczywiście dystrybuanta takiej zmiennej losowej
 wyraża się wzorem:
 \begin{eqnarray}
@@ -927,12 +1259,12 @@ F(x) = \left\{ \begin{array}{ll}
 \end{eqnarray}
 Oczywiste jest również, że $E(X)=x_0$ oraz $\mathscr{D}^2(X)=0$.
 \subsubsection{Rozkład dwupunktowy}
-\begin{defin}
+\begin{definition}
 Mówimy, że zmienna losowa $X$ ma \textbf{rozkład dwupunktowy}, jesli istnieją takie punkty $x_1, x_2$, że:
 \begin{equation}
 P(X=x_1)=p,~~P(X=x_2)=1-p, ~~(0<p<1)
 \end{equation}
-\end{defin}
+\end{definition}
 Oczywiście dystrybuanta takiej zmiennej losowej wyraża się wzorem:
 \begin{eqnarray}
 F(x) = \left\{ \begin{array}{ll}
@@ -958,19 +1290,19 @@ czyli ostatecznie:
 \begin{equation}
 P(X=k) = {n\choose k} p^kq^{n-k},~~k=0,1,\ldots,n
 \end{equation}
-\begin{defin}
+\begin{definition}
 Zmienną losową $X$ przyjmującą wartości $k=0,1,\ldots,n$ zgodnie z funkcją prawdopodobieństwa $(42)$ nazywamy\textbf{ zmienną losową o rozkładzie dwumianowym
 (Bernoulliego)}.
-\end{defin}
+\end{definition}
 W domu: wyznaczyć $E(X)$ i $\mathscr{D}^2(X)$ (skorzystać ze wzoru dwumianowego Newtona).
 \lecture{01.12.2008}
 \subsubsection{Rozkład Poissona}
-\begin{defin}
+\begin{definition}
 Mówimy, że zmienna $X$ ma \textbf{rozkład Poissona}, jeśli jej funkcja prawdopodobieństwa dana jest wzorem:
 \begin{equation}
 P(X=k) = \frac{\lambda^k}{k!} e^{-\lambda}, ~~\lambda>0,~ k=0,1,2,\ldots
 \end{equation}
-\end{defin}
+\end{definition}
 Wyliczmy wartość średnią i wariancję zmiennej losowej $X$. Wartość średnia:
 \[ E(X) = \sum_{k=1}^\infty k\frac{\lambda^k}{k!} e^{-\lambda} = e^{-\lambda} \sum_{k=1}^\infty \frac{\lambda^k}{(k-1)!} = 
  \lambda e^{-\lambda}\cdot \underbrace{\sum_{k=1}^\infty \frac{\lambda^{k-1}}{(k-1)!}}_{e^\lambda \textrm{~~z Maclaurina}} = \lambda
@@ -982,20 +1314,20 @@ Wariancję obliczymy ze wzoru $\mathscr{D}^2(X)=E(X^2)-E^2(X)$:
 Zatem:
 \[ \mathscr{D}^2(X) = \lambda^2 + \lambda - \lambda^2 = \lambda \]
 Związek pomiędzy rozkładem Bernoulliego a rozkładem Poissona podaje następujące twierdzenie:
-\begin{twier}
+\begin{theorem}
 Jeśi zmienne losowe $X_n$, n=1,2,\ldots, mają rozkład Bernoulliego o funkcji prawdopodobieństwa $P(X=k) = {n\choose k} p^kq^{n-k},~~k=0,1,\ldots,n$, oraz
 $np=\lambda, ~\lambda>0,~n=1,2,\ldots$, to:
 \begin{equation}
 \lim_{n\rightarrow\infty} P(X_n=k)=\frac{\lambda^k}{k!}e^{-\lambda}
 \end{equation}
-\end{twier}
+\end{theorem}
 Z twierdzenia tego wynika przede wszystkim to, że rozkład Poissona ma tę samą naturę z punktu widzenia niezależności, co rozkład Bernoulliego, 
 a ponadto rozkład Bernoulliego można zastąpić rozkładem Poissona dla dużych $n$ (w praktyce $n>20$) i małych $p=\frac{\lambda}{n}$ (w praktyce $p<0.2$).
 
 Powyżej rozpatrywaliśmy przykłady rozkładów zmiennych losowych typu skokowego. W kolejnych 3 punktach podamy ważne przykłady rozkładów zmiennych losowych typu ciągłego.
 
 \subsubsection{Rozkład równomierny}
-\begin{defin}
+\begin{definition}
 Mówimy, że zmienna losowa $X$ ma rozkład równomierny na skończonym przedziale $[a,b]$ jeśli jej funkcja gęstości dana wzorem:
 \begin{eqnarray}
 f(x) = \left\{ \begin{array}{ll}
@@ -1003,16 +1335,16 @@ f(x) = \left\{ \begin{array}{ll}
 0 & \textrm{dla $x\notin [a,b]$}
 \end{array} \right.
 \end{eqnarray}
-\end{defin}
+\end{definition}
 W domu: wylicz $E(X)$ i $\mathscr{D}^2(X)$
 
 \subsubsection{Rozkład normalny (Gaussa, gaussowski)}
-\begin{defin}
+\begin{definition}
 Mówimy, że zmienna losowa $X$ ma \textbf{rozkład normalny (Gaussa)}, jeśli jej funkcja gęstości dana jest wzorem:
 \begin{equation}
 f(x) = \frac{1}{b\sqrt{2\pi}}\exp \left[\frac{-(x-a)^2}{2b^2}\right] = \frac{1}{b\sqrt{2\pi}}e^\frac{-(x-a)^2}{2b^2},~~a\in (-\infty,\infty),~b>0
 \end{equation}
-\end{defin}
+\end{definition}
 Badając tę funkcję standardowymi metodami analizy matematycznej, łatwo stwierdzamy, że $f(x)$:
 \begin{itemize}
 \item ma maksimum dla $x=a$
@@ -1072,7 +1404,7 @@ lub
 Z nierówności tej wynika zatem, że rozkład normalny (rozkłady zbliżone do normalnego) są mocno skupione wokół wartości średnich.
 
 \subsubsection{Rozkład wykładniczy}
-\begin{defin}
+\begin{definition}
 Mówimy, że zmienna losowa $X$ ma rozkład wykładniczy, jesli jej funkcja gęstości dana jest wzorem:
 \begin{eqnarray}
 f(x) = \left\{\begin{array}{ll}
@@ -1080,13 +1412,13 @@ f(x) = \left\{\begin{array}{ll}
 \lambda e^{-\lambda x} & \textrm{~~dla $x>0,~\lambda>0$}
 \end{array}\right.
 \end{eqnarray}
-\end{defin}
+\end{definition}
 W domu: wylicz $E(X)$ i $\mathscr{D}^2(X)$. \\\\
 $\circledcirc$ Podamy obecnie dwie definicje dotyczące regresji:
-\begin{defin}
+\begin{definition}
 Zbiór warunkowych wartości średnich $E(Y|X=x)$ rozpatrywany jako funkcja $x$ nazywamy \textbf{krzywą (funkcją) regresji} zmiennej losowej $Y$
 względem zmiennej losowej $X$ (lub odwrotnie). 
-\end{defin}
+\end{definition}
 Zauważmy, że jeśli zmienne losowe $X, Y$ są niezależne, to funkcja regresji zmiennej losowej $Y$ 
 względem zmiennej losowej $X$ jest prostą równoległą do osi $x$, a funkcja regresji zmiennej losowej $X$ względem zmiennej losowej $Y$ jest 
 prostą równoległą do osi $y$.
@@ -1098,9 +1430,9 @@ na płaszczyźnie $(X,Y)$ zapewnia minimalne średnie odchylenie kwadratowe wart
 \end{center}
 Jeśli zatem równanie poszukiwanej prostej to $y=ax+b$, musi być spełniony warunek:
 \[ E\left\{\left[Y-(aX+b)\right]^2\right\}=min. \]
-\begin{defin}
+\begin{definition}
 Prostą o powyższej własności nazywamy \textbf{prostą regresji drugiego rodzaju} zmiennej losowej $Y$ względem zmiennej losowej $X$ (lub odwrotnie).
-\end{defin}
+\end{definition}
 Uwaga: niekiedy regresją zdefiniowaną w pierwszej definicji nazywa się \textbf{regresją pierwszego rodzaju}.\\
 W domu: 
 
@@ -1108,7 +1440,7 @@ wyliczyć parametry $a,~b$ prostej regresji drugiego rodzaju.
 \lecture{08.12.2008}
 \subsection{Ciągi zmiennych losowych i rodzaje ich zbieżności}
 Poniżej zdefiniujemy główne typy zbieżnosci ciągów zmiennych losowych.
-\begin{defin}
+\begin{definition}
 Ciąg zmiennych losowych $X_1, X_2, \ldots$ jest \textbf{zbieżny z prawdopodobieństwem 1} (``prawie na pewno'', ogólnie: ``prawie wszędzie'') do zmiennej
 losowej $X$, jeśli:
 \begin{equation}
@@ -1118,25 +1450,25 @@ lub krótko:
 \begin{equation}
 P(\lim_{n\rightarrow\infty}X_n=X)=1
 \end{equation}
-\end{defin}
-\begin{defin}
+\end{definition}
+\begin{definition}
 Ciąg zmiennych losowych $X_1, X_2, \ldots$ jest \textbf{zbieżny według prawdopodobieństwa} (stochastycznie, ogólnie: według miary) do zmiennej
 losowej $X$, jeśli:
 \begin{equation}
 \bigwedge_{\epsilon>0} \lim_{n\rightarrow\infty} P(|X_n-X|\geq\epsilon) = 0
 \end{equation}
-\end{defin}
-\begin{defin}
+\end{definition}
+\begin{definition}
 Ciąg zmiennych losowych $X_1, X_2, \ldots$ o dystrybuantach $F_1(x), F_2(x), \ldots$ jest \textbf{zbieżny według dystrybuanty} do zmiennej 
 losowej $X$ o dystrybuancie $F(x)$ jeśli ciąg funkcji $F_1(x), F_2(x), \ldots$ jest zbieżny do funkcji $F(x)$.
-\end{defin}
-\begin{defin}
+\end{definition}
+\begin{definition}
 Ciąg zmiennych losowych $X_1, X_2, \ldots$ takich, że $E(X_i^2)<\infty, i=1,2,\ldots$ jest \textbf{zbieżny średnio z kwadratem} do zmiennej losowej $X$
 takiej, że $E(X^2)<\infty)$, jeśli:
 \begin{equation}
 \lim_{n\rightarrow\infty}E(X_n-X)^2=0
 \end{equation}
-\end{defin}
+\end{definition}
 Można wykazać, że pomiędzy powyższymi rodzajami zbieżności istnieją następujące związki:
 \begin{center}
 \textbf{TODO}: flowchart
@@ -1170,30 +1502,30 @@ Oczywiście:
 ($m_i$ -- wartość średnia kolejnych niezależnych zmiennych losowych)
 oraz:
 \[ \mathscr{D}^2(M_n) = \frac{1}{n^2} \sum_{i=1}^n\sigma_i^2 \]
-\begin{twier}[Słabe prawo wielkich liczb Markowa]
+\begin{theorem}[Słabe prawo wielkich liczb Markowa]
 Jeśli przy powyższych założeniach i dodatkowo $\lim_{n\rightarrow\infty}\mathscr{D}^2(M_n)=0$, to:
 \begin{equation}
 \bigwedge_{\epsilon>0}\lim_{n\rightarrow\infty}P\left[|M_n-E(M_n)|\geq\epsilon\right]=0
 \end{equation}
 czyli ciąg zmiennych losowych $M_1,M_2,\ldots$ jest zbieżny według prawdopodobieństwa do zmiennej losowej $E(M_n)=\frac{1}{n}\sum_{i=1}^nm_i$.
-\end{twier}
+\end{theorem}
 Dowód (w domu): zastosuj nierówność Czebyszewa dla zmiennej losowej $M_n$.
-\begin{twier}[Słabe prawo wielkich liczb Chinczyna]
+\begin{theorem}[Słabe prawo wielkich liczb Chinczyna]
 Niech $X_1,X_2,\ldots$ będzie ciągiem niezależnych zmiennych losowych o jednakowym rozkładzie prawdopodobieństwa z \\$E(X_i)=m,~i=1,2,\ldots$; 
 wówczas:
 \begin{equation}
 \bigwedge_{\epsilon>0} \lim_{n\rightarrow\infty} P\left[|M_n-m|\geq\epsilon\right]=0
 \end{equation}
 czyli ciąg zmiennych losowych $M_1,M_2,\ldots$ jest zbieżny według prawdopodobieństwa do $m$.
-\end{twier}
-\begin{twier}[Mocne prawo wielkich liczb]
+\end{theorem}
+\begin{theorem}[Mocne prawo wielkich liczb]
 Niech $X_1,X_2,\ldots$ będzie ciągiem niezależnych zmiennych losowych o jednakowym rozkładzie prawdopodobieństwa z 
 $E(X_i)=m, ~\mathscr{D}^2(X_i)=\sigma^2,~i=1,2,\ldots$; wówczas:
 \begin{equation}
 P(\lim_{n\rightarrow\infty}M_n=m)=1
 \end{equation}
 czyli ciąg zmiennych losowych $M_1,M_2,\ldots$ jest zbieżny z prawdopodobieństwem $1$ do wartości średniej $m$.
-\end{twier}
+\end{theorem}
 \subsubsection{Centralne twierdzenia graniczne}
 Niech $X_1,X_2,\ldots$ będzie ciągiem niezależnych zmiennych losowych o jednakowym rozkładzie prawdopodobieństwa z $E(X_i)=m,
 ~\mathscr{D}^2(X_i)=\sigma^2\neq0,~i=1,2,\ldots$. Rozpatrzmy zmienną losową $Y_n=\sum_{i=1}^nX_i,~n=1,2,\ldots$. Unormujmy tę zmienną
@@ -1201,14 +1533,14 @@ losową wprowadzając zmienną losową $Z_n$ określoną wzorem:
 \[ Z_n = \frac{Y_n-E(Y_n)}{\sigma_{Y_n}} \]
 Oczywiście $E(Y_n)=n\cdot m$ oraz $\mathscr{D}^2(Y_n)=n\sigma^2$, a zatem:
 \[ Z_n = \frac{Y_n-n\cdot m}{\sigma\sqrt{n}} \]
-\begin{twier}[Lindeberga-L\'evy'ego]
+\begin{theorem}[Lindeberga-L\'evy'ego]
 Przy powyższych założeniach ciąg zmiennych losowych $Z_1,Z_2,\ldots$ (tych unormowanych sum) jest zbieżny według dystrybuant do zmiennej
 losowej $Z$ o rozkładzie $N(0,1)$ czyli:
 \begin{equation}
 \bigwedge_z \lim_{n\rightarrow\infty}F_n(z)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^ze^\frac{-z^2}{2}dz
 \end{equation}
 gdzie $F_n(Z)$ jest dystrybuantą zmiennej losowej $Z_n$.
-\end{twier}
+\end{theorem}
 Dowód otrzymujemy, obliczając funkcję charakterystyczną zmiennej losowej $Z_n$ i rozwijając ją w szereg Maclaurina.
 
 \textbf{Uwagi}:
@@ -1237,10 +1569,10 @@ wspomniany wyżej parametr jest czasem, a gdy nie, wówczas mówią o ``funkcjac
 że w naszych zastosowaniach wzmiankowany parametr będzie zawsze czasem. 
 
 Powyższe rozważania prowadzą do następujących definicji.
-\begin{defin}
+\begin{definition}
 Procesem losowym nazywamy rodzinę zmiennych losowych $\left\{X_t(\omega),~t\in T\right\}$ określoną na przestrzeni probabilistycznej 
 $\left\{ \Omega,~\mathscr{A},~P \right\}$.
-\end{defin}
+\end{definition}
 \lecture{09.11.2008}
 Proces losowy jest zatem losową funkcją $t$, która dla każdego $t\in T$ jest zmienną losową. Tę zmienną losową $X_t(\omega)$ dla 
 \textbf{ustalonego} $t$ nazywamy \textbf{wartością} procesu losowego w chwili $t$, a zbiór wszystkich wartości zmiennej losowej $X_t(\omega),~t\in T$ tworzy
@@ -1256,9 +1588,9 @@ W celu głębszego zrozumienia natury procesu losowego, spójrzmy nań jeszcze z
 zdarzeniom elementarnym ogólnie punkty w przestrzeni $R^n$. W wypadku procesu losowego zdarzeniu elementarnemu jest przyporządkowywana skończona funkcja rzeczywista
 $X(t)$ zwana \textbf{realizacją procesu losowego}. Zbiór realizacji procesu losowego odpowiadający wszystkim $\omega\in\Omega$ nazywać będziemy \textbf{przestrzenią realizacji}
 procesu losowego. Prowadzi to do kolejnej definicji procesu losowego:
-\begin{defin}
+\begin{definition}
 Procesem losowym nazywamy mierzalną względem $P$ transformacją przestrzeni zdarzeń elementarnych w przestrzeń realizacji.
-\end{defin}
+\end{definition}
 \textbf{Uwaga}:\\
 Na przestrzeń realizacji narzucone są na ogół pewne dodatkowe wymagania np. gdyby była to przestrzeń Banacha (Stefan Banach, 1892-1945), czyli przestrzeń
 unormowana (czyli też liniowa) i zupełna.
@@ -1282,13 +1614,13 @@ między wartościami tego procesu dla różnych $t$, jest on zatem wystarczając
 losowe są niezależne, co w praktyce w zasadzie nie zachodzi.
 
 Definiuje się zatem rozkład procesu losowego dla układu $n$ chwil.
-\begin{defin}
+\begin{definition}
 $n$\dywiz wymiarowym rozkładem procesu losowego $X(t)$ nazywamy łączny rozkład wartości tego procesu dla układu chwil $t_1,t_2,...,t_n,~\bigwedge_it_i\in T$,
 czyli łączny rozkład wektora losowego $[X(t_1), X(t_2),\ldots,X(t_n)]$ scharakteryzowany przez łączną dystrybuantę
 \begin{equation}
 F(x_1,t_1;~x_2,t_2;\ldots x_n,t_n) = P[X(t_1)<x_1,X(t_2)<x_2,\ldots,X(t_n)<x_n]
 \end{equation}
-\end{defin}
+\end{definition}
 Z twierdzenia Kołmogorowa wynika, że znajomość $n$\dywiz wymiarowych rozkładów procesu losowego dla dowolnego, skończonego $n$ i dowolnego układu chwil
 $t_1,t_2,\ldots,t_n,~\bigwedge_it_i\in T$ potrzeba i wystarcza do pełnego opisu procesu losowego.
 \subsection{Momenty procesu losowego}
@@ -1296,34 +1628,34 @@ Podobnie jak w wypadku zmiennych losowych także dla procesów losowych definiuj
 momenty.
 
 Np. znając jednowymiarowy rozkład procesu losowego scharakteryzowany przez dystrybuantę $F(x,t)$, możemy zdefiniować wartość średnią i wariancję procesu losowego:
-\begin{defin}
+\begin{definition}
 \textbf{Wartością średnią procesu losowego} $X(t)$ nazywamy funkcję $m(t)$ określającą dla każdego $t\in T$ wartość średnią zmiennej losowej $X(t)$, którą proces jest w chwili
 $t$, czyli:
 \begin{equation}
 m(t)=E[X(t)]=\int_{-\infty}^\infty xdF(x,t)
 \end{equation}
-\end{defin}
-\begin{defin}
+\end{definition}
+\begin{definition}
 \textbf{Wariancją procesu losowego} $X(t)$ nazywamy funkcję $\sigma^2(t)$ określającą dla każdego $t\in T$ wariancję zmiennej losowej $X(t)$, którą proces jest w chwili
 $t$, czyli:
 \begin{equation}
 \sigma^2(t)=\mathscr D^2[X(t)]=E[X(t)-m(t)]^2
 \end{equation}
-\end{defin}
+\end{definition}
 Oczywiście jednowymiarowe momenty procesu losowego nie charakteryzują zależności między jego wartościami w różnych czasowych, żeby je scharakteryzować weźmy najlepiej dwie
 chwile $t_1,t_2,~t_i\in T,~i=1,2$.
-\begin{defin}
+\begin{definition}
  \textbf{Funkcję korelacyjną} procesu losowego $X(t)$ definiujemy wzorem:
 \begin{equation}
 R_X(t_1,t_2)=E\{[X(t_1)-m(t_1)][X(t_2)-m(t_2)]
 \end{equation}
-\end{defin}
-\begin{defin}
+\end{definition}
+\begin{definition}
 \textbf{Unormowaną funkcję korelacyjną} lub \textbf{współczynnik korelacji procesu losowego} $X(t)$ definiujemy wzorem:
 \begin{equation}
 r_X(t_1,t_2)=\frac{R_X(t_1,t_2)}{\sigma(t_1)\sigma(t_2)}
 \end{equation}
-\end{defin}
+\end{definition}
 Funkcję korelacyjną procesu losowego $X(t)$, podobnie jak jego inne wielowymiarowe momenty, możemy zdefiniować dla dowolnego $n$:
 \[ R_X(t_1,t_2,\ldots,t_n) = E\{[X(t_1)-m(t_1)][X(t_2)-m(t_2)]\cdots[X(t_n)-m(t_n)] \]
 Jest to \textbf{$n$\dywiz wymiarowa funkcja korelacyjna procesu losowego $X(t)$}. W praktyce okazuje się jednak, że znajomość dwóch pierwszych momentów procesu losowego
@@ -1334,12 +1666,12 @@ skończenie wymiarowe rozkłady są gaussowskie.
 Często w praktyce zachodzi potrzeba łącznego badania kilku procesów losowych (np. w układach sterowania o wielu wejściach i wyjściach), prowadzi to do pojęcia 
 \textbf{wektorowego procesu losowego}. Rozpatrzmy ten proces ograniczając się do $n=2[X(t),Y(t)]$. Zdefiniujmy moment charakteryzujący ten proces w dwóch różnych 
 chwilach czasowych $t_1$ i $t_2$. 
-\begin{defin}
+\begin{definition}
 \textbf{Funkcję korelacji wzajemnej} procesów losowych $X(t),Y(t)$ definiujemy wzorem:
 \begin{equation}
 R_{XY}(t_1,t_2)=E\left\{ [X(t_1)-m_X(t_1)][Y(t_2)-m_Y(t_2)] \right\}
 \end{equation}
-\end{defin}
+\end{definition}
 W związku z tym, funkcję korelacyjną \textbf{pojedyńczego} procesu losowego nazywa się niekiedy \textbf{funkcją korelacji własnej} lub \textbf{funkcją autokorelacji}
 i~oznacza np. $R_{XX}(t_1,t_2)$.
 
@@ -1364,14 +1696,14 @@ Wyróżnia się zatem różne klasy procesów losowych, które tę teorię upras
 \textbf{procesów stacjonarnych}.
 
 Wyróżnia się procesy stacjonarne w \textbf{sensie węższym} i w \textbf{sensie szerszym}.
-\begin{defin}
+\begin{definition}
  Proces losowy $X(t)$ nazywamy \textbf{stacjonarnym w węższym sensie}, jeśli dla dowolnego $n$, dowolnego układu chwil $t_1,t_2,\ldots,t_n$ oraz dowolnego
 $\Delta$ takiego, że $(t_i+\Delta)\in T,~i=1,2,\ldots,n$ zachodzi:
 \begin{equation}
 F(x_1,t_1;~x_2,t_2;~\ldots;~x_n,t_n)=F(x_1,t_1+\Delta;~x_2,t_2+\Delta;~\ldots;~x_n,t_n+\Delta)
 \end{equation}
 ($n$\dywiz wymiarowa dystrybuanta nie zmienia się w przesunięciu liniowym o $\Delta$; charakter losowy się nie zmienia!)
-\end{defin}
+\end{definition}
 \lecture{05.01.2009}
 %----------------wklejone od Jarka ^-----------------------------------------------------------------------------------------------------------
 W szczególności dla $n=1$:
@@ -1392,38 +1724,38 @@ dwuwymiarowy zależy tylko od \textbf{różnicy} $\tau = t_2-t_1$. W konsekwencj
 Oczywiście przy założeniu, że $R_X(\tau)$ istnieje.
 
 Powyższa obserwacja prowadzi do definicji procesu stacjonarnego w szerszym sensie.
-\begin{defin}
+\begin{definition}
 Proces losowy $X(t)$ nazywamy \textbf{stacjonarnym w szerszym sensie}, jeśli istnieją dla niego $m(t)$ i $R_X(t_1, t_2)$, oraz:
 \[ m(t) = m = const \]
 \[ R_X(t_1, t_2) = R_X(\tau),~~\tau = t_2-t_1\]
-\end{defin}
+\end{definition}
 Łatwo wykazać następujące twierdzenie:
-\begin{twier}
+\begin{theorem}
 Proces stacjonarny w węższym sensie, dla którego wartość średnia z kwadratu jest skończona ($E[X^2(t)]<\infty$), jest stacjonarny w szerszym sensie.
 Dla procesów normalnych (gaussowskich), słuszne jest również twierdzenie odwrotne.
-\end{twier}
+\end{theorem}
 \textbf{Uwaga:} niektórzy autorzy, mówiąc ``proces losowy stacjonarny'', mają na myśli proces stacjonarny w sensie węższym i szerszym.
 
 Z pojęciem stacjonarności procesu losowego wiąże się pojęcie procesu o przyrostach stacjonarnych.
-\begin{defin}
+\begin{definition}
 Proces losowy $X(t)$ nazywamy procesem o \textbf{przyrostach stacjonarnych} (\textbf{jednorodnych}), jeśli dla dowolnego $\Delta$ 
 takiego, że $(t+\Delta)\in T$, proces losowy $Y(t) = X(t+\Delta) - X(t)$ jest stacjonarny w węższym sensie.
-\end{defin}
+\end{definition}
 
 \subsection{Procesy o przyrostach niezależnych i procesy Markowa}
-\begin{defin}
+\begin{definition}
 Proces losowy $X(t)$ nazywamy procesem \textbf{o przyrostach niezależnych}, jeśli dla dowolnego $n$, dowolnego układu chwil $t_1<t_2<\ldots<t_n$, zmienne
 losowe $X(t_1),~X(t_2)-X(t_1),~X(t_3)-X(t_2),~\ldots,~X(t_n)-X(t_{n-1}) $ są niezależne.
-\end{defin}
+\end{definition}
 Ważną klasą procesów o przyrostach niezależnych są procesy Poissona (będziemy je rozpatrywać na badaniach operacyjnych).
-\begin{defin}
+\begin{definition}
  Proces losowy $X(t)$ nazywamy \textbf{procesem Markowa}, jeśli dla dowolnego $n$, dowolnego układu chwil $t_1<t_2<\ldots<t_n$, oraz dla dowolnych liczb
 rzeczywistych $x_1,~x_2,~\ldots,~x_n$ zachodzi:
 \begin{eqnarray}
 & P[X(t_n)<x_n|X(t_{n-1})=x_{n-1},~X(t_{n-2})=x_{n-2},~\ldots,~X(t_1)=x_1] \\\nonumber
 & = P[X(t_n)<x_n|X(t_{n-1})=x_{n-1}]
 \end{eqnarray}
-\end{defin}
+\end{definition}
 Widzimy zatem, że dla procesu Markowa rozkład warunkowy jego wartości w dowolnej chwili $t_n$, pod warunkiem, że jego wartości w chwilach $t_{n-1},~
 t_{n-2},~\ldots$ są ustalone,
 zależy tylko od wartości tego procesu w chwili $t_{n-1}$.
@@ -1437,9 +1769,9 @@ Oczywiście dla pełnego opisu procesu Markowa, wystarcza także znajomość roz
 A~zatem, dla pełnego opisu procesu Markowa, \textbf{wystarcza rozkład dwuwymiarowy}. 
 
 Można wykazać następujące twierdzenie:
-\begin{twier}
+\begin{theorem}
 Jeśli $P[X(t_1)=c]=1$, gdzie $c$ jest dowolną stałą, to proces o przyrostach niezależnych jest procesem Markowa. Twierdzenie odwrotne nie jest prawdziwe.
-\end{twier}
+\end{theorem}
 Zauważmy, że szczególna postać powyższego warunku to $P[X(0)=0]=1$.
 \subsection{Ergotyczność procesów losowych}
 \[ m(t) = E[X(t)] = \int_{-\infty}^{\infty}xdF(x,t) \]
@@ -1499,10 +1831,10 @@ Ogólna teoria losowania jest oddzielnym działem statystyki matematycznej, omó
 
 W celu przeprowadzenia głębszych badań, musimy na próbę spojrzeć ogólniej, a mianowicie rozważyć \textbf{wszystkie możliwe próby o liczności n}, jakie
 można uzyskać w danej populacji generalnej, stosując odpowiedni schemat losowania. Prowadzi to do pojęcia próby losowej.
-\begin{defin}
+\begin{definition}
 \textbf{Próbą losową} nazywamy wektor losowy $(X_1,~X_2,~\ldots,~X_n)$, którego składowe są niezależnymi zmiennymi losowymi o tym samym rozkładzie 
 prawdopodobieństwa, będącym rozkładem interesującej nas cechy $X$ (czyli zmiennej losowej) w populacji generalnej.
-\end{defin}
+\end{definition}
 \begin{center}
  (rysunek)
 \end{center}
@@ -1517,9 +1849,9 @@ F(x_1,x_2,\ldots,x_n) &=& P(X_1<x_1,X_2<x_2,\ldots,X_n<x_n)\\\nonumber
 \end{eqnarray}
 gdzie $F(x)$ jest dystrybuantą interesującej nas cechy $X$. To samo dotyczy funkcji prawdopodobieństwa (czy funkcji gęstości prawdopodobieństwa).
 Podamy teraz definicję statystyki.
-\begin{defin}
+\begin{definition}
 \textbf{Statystyką} nazywamy dowolną funkcję próby losowej, czyli funkcję postaci $Y=f(X_1,X_2,\ldots,X_n),~f:R^n\longrightarrow R^1$.
-\end{defin}
+\end{definition}
 \subsection{Podstawy teorii estymacji}
 \subsubsection{Przedmiot teorii estymacji}
 Teoria estymacji jest działem statystyki matematycznej zajmującym się oceną parametrów rozkładu interesującej nas cechy  $X$ populacji generalnej, na 
@@ -1534,12 +1866,12 @@ W dalszym ciągu mówiąc ``estymator'' bedziemy mieli na myśli estymator punkt
 
 Załóżmy, że interesuje nas parametr $q$ rozkładu cechy $X$ w populacji generalnej, lub w maks. skrócie: parametr $q$ populacji generalnej. Oznaczmy przez
 $F(x,q)$ dystrybuantę interesującej nas cechy $X$ populacji generalnej.
-\begin{defin}
+\begin{definition}
 \textbf{Estymatorem} parametru $q$ cechy $X$ nazywamy dowolną statystykę $ Q_n = f(X_1,X_2,\ldots,X_n) $ taką, że:
 \begin{equation}
 \exists_{c>0}:\lim_{n\rightarrow\infty}P[|Q_n-q|<c]=1
 \end{equation}
-\end{defin}
+\end{definition}
 Wartość estymatora $Q_n$ wyznaczoną z próby $(x_1,x_2,\dots,x_n)$, czyli $q_n=f(x_1,x_2,\dots,x_n)$ nazywamy \textbf{oceną} parametru $q$.
 
 Z powyższej definicji widzimy, że może być wiele estymatorów danego parametru. Wymagana jest zatem ich klasyfikacja. W dalszym ciągu rozpatrzymy
@@ -1549,23 +1881,23 @@ główne klasy estymatorów, a mianowicie:
 \item estymatory nieobciążone;
 \item estymatory najefektywniejsze.
 \end{itemize}
-\begin{defin}
+\begin{definition}
 \textbf{Estymatorem zgodnym} parametru $q$ nazywamy estymator $Q_n$ tego parametru taki, że:
 \begin{equation}
 \forall_{\epsilon>0}:\lim_{n\rightarrow\infty}P[|Q_n-q|<\epsilon]=1.
 \end{equation}
-\end{defin}
+\end{definition}
 Zatem jest to estymator stochastycznie zbieżny (wg prawdopodobieństwa) do parametru $q$.
-\begin{defin}
+\begin{definition}
 \textbf{Estymatorem nieobciążonym} parametru $q$ nazywamy estymator $Q_n$ tego parametru taki, że:
 \begin{equation}
 E(Q_n) = q,~~n=1,2,\ldots.
 \end{equation}
-\end{defin}
+\end{definition}
 Różnicę $E(Q_n)-q$ nazywamy obciążeniem estymatora $Q_n$.
-\begin{defin}
+\begin{definition}
 \textbf{Estymatorem najefektywniejszym} parametru $q$ nazywamy estymator nieobciążony tego parametru $Q_n$, który ma minimalną wariancję
-\end{defin}
+\end{definition}
 Wyznaczenie estymatora najefektywniejszego, przy założeniu że on istnieje, umożliwia tzw. nierówność Rao\dywiz Cram\'{e}ra, zwana też nierównością informacyjną.
 
 Można mianowicie wykazać, że jeśli $Q_n$ jest estymatorem nieobciążonym parametru $q$, to prawdziwa jest następująca \textbf{nierówność Rao-Cram\'{e}ra}:
