@@ -47,12 +47,19 @@
 \newcommand{\Warning}{\marginpar{\dbend}\textbf{\textit{Uwaga: }}}
 \newcommand{\dd}{\; \mathrm{d}}
 
+\numberwithin{equation}{subsection}
+
 \transtrue
 
 \begin{document}
+
 \maketitle
+
+
 \lecture{30.09.2008}
+
 \tableofcontents
+
 \section{Zdarzenia i prawdopodobieństwo}
 \subsection{Uwagi wstępne}
 Obserwując rzeczywistość spotykamy się często ze \textbf{zjawiskami losowymi
@@ -95,7 +102,7 @@ na połowęr~VII~w.\ i~są związane z nazwiskami uczonych:
   \item Blaise Pascal (1623-1662),
   \item Pierre de Fermat (1601-1665)\footnote{Wielkie twierdzenie Fermata:
       $\forall n\in\mathbb{N}:\,\neg\exists x,y,z\in\mathbb{C}_+:\,,x^n+y^n=z^n$.
-      Dowód tego twierdzenia został podany dopiero w 1994 r.\ przez A.\ J.\ Wiles,
+      Dowód tego twierdzenia został podany dopiero w 1994 r.\ przez A.~J.~Wiles,
       jednak do tej pory nie istnieje dowód analityczny.},
   \item Jacob Bernoulli (1654-1705).
 \end{itemize}
@@ -307,7 +314,7 @@ Możemy teraz zdefiniować pojęcie miary oraz pojęcie funkcji mierzalnej.
 \begin{definition}
   \textbf{Miarą} nazywamy każdą nieujemną, przeliczalnie addytywną funkcję
   rzeczywistą, określoną na pewnej $\sigma$-algebrze $\mathscr{A}$ podzbiorów
-  przestrzeni $\Omega$, tzn.\ nieujemną funkcję rzeczywistą $\mu$, nierówną
+  przestrzeni $\Omega$, tzn.~nieujemną funkcję rzeczywistą $\mu$, nierówną
   tożsamościowo nieskończoności taką, że:
   \begin{enumerate}
     \item $[(A_1,A_2,\dotsc\in\mathscr{A})\land(A_i\cap A_j=\emptyset,i\neq j)]
@@ -569,11 +576,11 @@ wzajemna implikuje niezależność parami, trójkami, itd.,
 \section{Zmienne losowe}
 \subsection{Pojęcie zmiennej losowej oraz jej rozkładu (prawdopodobieństwa)
   i~dystrybuanty}
-Jak pamiętamy, natura zdarzeń elementarnych może być różnoraka, np.
-\ w~rozpatrywanym rzucie monetą $\Omega=\left\lbrace O,R\right\rbrace$, w~rzucie
-kostką sześcienną $\Omega=\left\lbrace 1,2,3,4,5,6\right\rbrace$, itp.
+Jak pamiętamy, natura zdarzeń elementarnych może być różnoraka,
+np.~w~rozpatrywanym rzucie monetą $\Omega=\left\lbrace O,R\right\rbrace$,
+w~rzucie kostką sześcienną $\Omega=\left\lbrace 1,2,3,4,5,6\right\rbrace$, itp.
 Żeby~się od~tej różnorakości uwolnić, przypiszemy każdemu zdarzeniu
-elementarnemu liczbę rzeczywistą, np.\ w~pierwszym przypadku wyjściu orła 0,
+elementarnemu liczbę rzeczywistą, np.~w~pierwszym przypadku wyjściu orła 0,
 a~wyjściu reszki 1, w~drugim przypadku tę liczbę, która się pojawiła. W~ten
 sposób definiujemy na przestrzeni zdarzeń elementarnych $\Omega$ pewną funkcję
 rzeczywistą. Chcemy jednak, aby dla tej funkcji było określone prawdopodobieństwo
@@ -927,232 +934,392 @@ Zauważmy, że z własności b) wynika, że
   \mathscr{D}^2(C) = 0,\;\mathscr{D}^2(cX) = c^2\mathscr{D}^2(X)
 \]
 Często wykorzystuje się pojęcie zmiennej losowej unormowanej.
+
 \begin{definition}
-Mówimy, że zmienna losowa $X$ jest \textbf{unormowana (standaryzowana)}, jeśli
-\[E(X) = 0 \textrm{~~i~~} \mathscr{D}^2(X)=1\] 
+  Mówimy, że zmienna losowa $X$ jest \textbf{unormowana (standaryzowana)}, jeśli
+  \[
+    E(X) = 0 \land \mathscr{D}^2(X)=1
+  \]
 \end{definition}
+
 Łatwo wykazać następujące twierdzenie:
+
 \begin{theorem}
-Dla dowolnej zmiennej losowej $X$, zmienna losowa $Y$ dana wzorem
-\[Y=\frac{X-E(X)}{\mathscr{D}(X)}\]
-jest unormowana.
+  Dla dowolnej zmiennej losowej $X$, zmienna losowa $Y$ dana wzorem
+  \[
+    Y = \frac{X-E(X)}{\mathscr{D}(X)}
+  \]
+  jest unormowana.
 \end{theorem}
-Dowód: \textbf{TODO}
+\begin{proof}
+  TODO
+\end{proof}
 
 Przejdźmy teraz do zdefiniowania głównych parametrów pozycyjnych.
+
 \begin{definition}
-\textbf{Wartością modalną} zmiennej losowej $X$ nazywamy punkt, w którym maksimum osiąga:
-\begin{itemize}
-\item funkcja prawdopodobieństwa, gdy $X$ jest typu skokowego;
-\item funkcja gęstości, gdy $X$ jest typu ciągłego.
-\end{itemize}
+  \textbf{Wartością modalną} zmiennej losowej $X$ nazywamy punkt, w którym maksimum osiąga:
+  \begin{itemize}
+    \item funkcja prawdopodobieństwa, gdy $X$ jest typu skokowego;
+    \item funkcja gęstości, gdy $X$ jest typu ciągłego.
+  \end{itemize}
 \end{definition}
-Widzimy zatem, że zmienna losowa może mieć jedną wartość modalną, wiele takich wartości, lub w ogóle nie posiadać wartości modalnej.
+
+Widzimy zatem, że~zmienna losowa może mieć jedną wartość modalną, wiele takich
+wartości, lub w~ogóle nie~posiadać wartości modalnej.
+
 \begin{definition}
-Wartość $x_p$ spełniającą dla każdego $p$, $0<p<1$, nierówności:
-\[P(X\leq x_p)\geq p\]
-\[P(X\geq x_p)\geq 1-p\]
-nazywamy \textbf{kwantylem rzędu $p$} zmiennej losowej $X$.
+  Wartość $x_p$ spełniającą dla każdego $p$, $0<p<1$, nierówności:
+  \[
+    P(X\leq x_p)\geq p
+  \]
+  \[
+    P(X\geq x_p)\geq 1-p
+  \]
+  nazywamy \textbf{kwantylem rzędu $p$} zmiennej losowej $X$.
 \end{definition}
-Kwantyl rzędu $0,5$ ($x_{0,5}$ lub $x_{1/2}$) nazywamy \textbf{medianą}, a kwantyle rzędu $0,25$, $0,75$ nazywamy \textbf{kwartylami}.
-Zauważmy, że mediana istnieje dla dowolnej zmiennej losowej, podczas gdy wartość średnia może nie istnieć (odpowiednia całka lub suma dąży do nieskończoności).
+
+Kwantyl rzędu $0,5$ ($x_{0,5}$ lub $x_{1/2}$) nazywamy \textbf{medianą},
+a~kwantyle rzędu $0,25$, $0,75$ nazywamy \textbf{kwartylami}. Zauważmy,
+że~mediana istnieje dla dowolnej zmiennej losowej, podczas gdy wartość średnia
+może nie istnieć (odpowiednia całka lub suma dąży do nieskończoności).
+
 \subsection{Wielowymiarowe zmienne losowe}
+
 \begin{definition}
-Układ $n$ funkcji rzeczywistych $(X_1,X_2,...,X_n)$ określony na $\Omega$ nazywamy \textbf{$n$\dywiz wymiarową (lub łączną) zmienną losową} (lub \textbf{wektorem losowym}) jeśli przeciwobraz każdego zbioru borelowskiego w $R^n$ otrzymany za pomocą tego układu jest zdarzeniem losowym.
+  Układ $n$ funkcji rzeczywistych $(X_1,X_2,\dotsc,X_n)$ określony na~$\Omega$
+  nazywamy \textbf{$n$\dywiz wymiarową (lub łączną) zmienną losową}
+  (lub \textbf{wektorem losowym}) jeśli przeciwobraz każdego zbioru
+  borelowskiego w~$\mathbb{R}^n$ otrzymany za pomocą tego układu jest zdarzeniem
+  losowym.
 \end{definition}
-Inaczej mówiąc $n$-wymiarowa zmienna losowa to odwzorowanie 
-\[(X_1,X_2,...,X_n):\Omega~\textrm{w}~R^n\]
+
+Inaczej mówiąc $n$-wymiarowa zmienna losowa to odwzorowanie
+\[
+  (X_1,X_2,\dotsc,X_n):\Omega \mapsto \mathbb{R}^n
+\]
 mierzalne względem miary probabilistycznej $P$.
 
 Rozkład prawdopodobieństwa i dystrybuantę zmiennej losowej $n$\dywiz wymiarowej definiujemy analogiczne jak dla zmienej losowej jednowymiarowej. Podajmy definicję
 dystrybuanty:
 \begin{definition}
-Funkcję rzeczywistą  określoną w $R^n$ wzorem (przecinek oznacza koniunkcję!):
-\[F(x_1,x_2,...,x_n) = P(X_1<x_1,X_2<x_2,...,X_n<x_n)\]
-nazywamy \textbf{$n$-wymiarową (łączną) dystrybuantą} wektora losowego $(X_1,X_2,...,X_n)$.
+  Funkcję rzeczywistą  określoną w $\mathbb{R}^n$ wzorem (przecinek oznacza
+  koniunkcję!):
+  \[
+    F(x_1, x_2,\dotsc, x_n) = P(X_1 < x_1, X_2 < x_2,\dotsc, X_n < x_n)
+  \]
+  nazywamy \textbf{$n$-wymiarową (łączną) dystrybuantą} wektora
+  losowego $(X_1,X_2,\dotsc,X_n)$.
 \end{definition}
-W dalszym ciągu zajmiemy się zmienną losową dwuwymiarową $(X,Y)$, o łącznej dystrybuancie:
-\[F(x,y) = P(X<x, Y<y).\]
-Łatwo zauważyć, że dystrybuanta $F(x,y)$ jest względem każdego argumentu funkcją nieujemną, niemalejącą i przynajmniej lewostronnie ciągłą, oraz:
-\[F(-\infty, y) = F(x, -\infty) = 0\]
-\[F(+\infty, +\infty) = 1.\]
-Jednak, w przeciwieństwie do zmiennej losowej jednowymiarowej, powyższe własności nie wystarczają na to, by funkcja $F(x,y)$ była łączną dystrybuantą zmiennej losowej 
-$(X,Y)$. Musi być mianowicie spełniony warunek  dla dowolnych $x_1<x_2, y_1<y_2$:
+
+W dalszym ciągu zajmiemy się zmienną losową dwuwymiarową $(X,Y)$, o łącznej
+dystrybuancie:
+\[
+  F(x,y) = P(X<x, Y<y)
+\]
+
+Łatwo zauważyć, że~dystrybuanta $F(x,y)$ jest względem każdego argumentu funkcją
+nieujemną, niemalejącą i~przynajmniej lewostronnie ciągłą, oraz:
+\[
+  F(-\infty, y) = F(x, -\infty) = 0
+\]
+\[
+  F(+\infty, +\infty) = 1
+\]
+
+Jednak, w~przeciwieństwie do~zmiennej losowej jednowymiarowej, powyższe własności
+nie~wystarczają na~to, by funkcja $F(x,y)$ była łączną dystrybuantą zmiennej
+losowej $(X,Y)$. Musi być mianowicie spełniony warunek dla dowolnych
+$x_1 < x_2, y_1 < y_2$:
 \begin{equation}
-F(x_2,y_2)-F(x_2, y_1) - F(x_1, y_2) + F(x_1, y_1) \geq 0
+  F(x_2,y_2)-F(x_2, y_1) - F(x_1, y_2) + F(x_1, y_1) \geq 0
 \end{equation}
-Wynika to z faktu, iż prawdopodobieństwo tego, że zmienna losowa $(X,Y)$ przyjmie wartość należącą do prostokąta $(x_1\leq X\leq x_2, y_1\leq Y\leq y_2)$ musi być nieujemne.
+
+Wynika to z faktu, iż prawdopodobieństwo tego, że zmienna losowa $(X,Y)$
+przyjmie wartość należącą do prostokąta $(x_1\leq X\leq x_2, y_1\leq Y\leq y_2)$
+musi być nieujemne.
 
 Zdefiniujmy zmiennej losowe dwuwymiarowe typu skokowego i typu ciągłego.
-\begin{definition}
-Zmienną losową $(X,Y)$ nazywamy typu skokowego (lub dyskretną), jeśli może przyjmować co najwyżej przeliczalną liczbę par $(x_i, y_k)$ zwanych \textbf{punktami skokowymi}
-z prawdopodobieństwami $p_{ik}$ zwanymi \textbf{skokami (masami)}.
-\end{definition}
-\lecture{17.11.2008}
-Oczywiście:
-\[\bigwedge_{i,k}p_{ik}\geq 0, \sum_k\sum_ip_{ik}=1\]
-Natomiast funkcja:
-\[P(X=x_i, Y=y_k) = p_{ik},~i=1,2,...;~k=1,2,...\]
-definiuje \textbf{dwuwymiarową (łączną) funkcję prawdopodobieństwa} tej zmiennej losowej. \textbf{Dwuwymiarowa (łączna) dystrybuanta} rozpatrywanej zmiennej losowej ma 
-natomiast postać:
-\begin{equation}
-F(x,y) = \sum_{x_i<x}\sum_{y_k<y}p_{ik}
-\end{equation}
-\begin{definition}
-Zmienną losową $(X,Y)$ nazwiemy \textbf{typu ciągłego}, jeśli dystrybuanta $F(x,y)$ jest funkcją absolutnie (bezwzględnie) ciągłą, tzn. istnieje taka funkcja rzeczywista
-$f(x,y)$, że dla każdego $(x,y)\in\mathbb{R}^2$ zachodzi:
-\begin{equation}
-F(x,y)=\int_{-\infty}^y\int_{-\infty}^xf(x,y)\dd{x}\dd{y}
-\end{equation}
-gdzie całkowanie odbywa się w sensie Lebesgue'a.
-\end{definition}
-Funkcja $f(x,y)$ nazywa się \textbf{dwuwymiarową (łączną) funkcją gęstości prawdopodobieństwa} zmiennej losowej $(X,Y)$ typu ciągłego.
 
-Z teorii całki Lebesgue'a w $\mathbb{R}^n$ wynika, że dla prawie wszystkich $(x,y)\in\mathbb{R}^2$ (z wyjątkiem zbioru miary Lebesgue'a równej 0), w szczególności w każdym
- punkcie $(x,y)$, w którym funkcja $f(x,y)$ jest ciągła, zachodzi:
+\begin{definition}
+  Zmienną losową $(X,Y)$ nazywamy typu skokowego (lub dyskretną), jeśli może
+  przyjmować co najwyżej przeliczalną liczbę par $(x_i, y_k)$ zwanych
+  \textbf{punktami skokowymi} z prawdopodobieństwami $p_{ik}$ zwanymi
+  \textbf{skokami (masami)}.
+\end{definition}
+
+
+
+\lecture{17.11.2008}
+
+Oczywiście:
+\[
+  \bigwedge_{i,k}p_{ik}\geq 0, \sum_k\sum_ip_{ik}=1
+\]
+
+Natomiast funkcja:
+\[
+  P(X=x_i, Y=y_k) = p_{ik},\;i=1,2,\cdots;\;k=1,2,\cdots
+\]
+definiuje \textbf{dwuwymiarową (łączną) funkcję prawdopodobieństwa} tej
+zmiennej losowej. \textbf{Dwuwymiarowa (łączna) dystrybuanta} rozpatrywanej
+zmiennej losowej ma natomiast postać:
+
 \begin{equation}
-f(x,y)=\frac{\partial^2F(x,y)}{\partial x\partial y}.
+  F(x,y) = \sum_{x_i<x} \sum_{y_k<y} p_{ik}
 \end{equation}
-Omówimy obecnie tzw. rozkłady brzegowe. Jeżeli dla zmiennej losowej $(X,Y)$ interesuje nas rozkład tylko jednej z jej zmiennych losowych, podczas gdy druga może przyjmować
-dowolną wartość, to mówimy o \textbf{rozkładzie brzegowym} odpowiedniej zmiennej.
+
+\begin{definition}
+  Zmienną losową $(X,Y)$ nazwiemy \textbf{typu ciągłego}, jeśli dystrybuanta
+  $F(x,y)$ jest funkcją absolutnie (bezwzględnie) ciągłą, tzn.~istnieje taka
+  funkcja rzeczywista $f(x,y)$, że dla każdego $(x,y)\in\mathbb{R}^2$ zachodzi:
+  \begin{equation}
+    F(x,y) = \int_{-\infty}^y \int_{-\infty}^x f(x, y) \dd{x}\dd{y}
+  \end{equation}
+  gdzie całkowanie odbywa się w sensie Lebesgue'a.
+\end{definition}
+
+Funkcja $f(x,y)$ nazywa się \textbf{dwuwymiarową (łączną) funkcją gęstości
+  prawdopodobieństwa} zmiennej losowej $(X,Y)$ typu ciągłego.
+
+Z~teorii całki Lebesgue'a w~$\mathbb{R}^n$ wynika, że~dla~prawie wszystkich
+$(x,y) \in \mathbb{R}^2$ (z~wyjątkiem zbioru miary Lebesgue'a równej 0),
+w~szczególności w~każdym punkcie $(x,y)$, w~którym funkcja $f(x,y)$ jest ciągła,
+zachodzi:
+\begin{equation}
+  f(x, y) = \frac{\partial^2F(x, y)}{\partial x\partial y}
+\end{equation}
+
+Omówimy obecnie tzw.~rozkłady brzegowe. Jeżeli dla zmiennej losowej $(X,Y)$
+interesuje nas rozkład tylko jednej z~jej zmiennych losowych, podczas gdy druga
+może przyjmować dowolną wartość, to mówimy o~\textbf{rozkładzie brzegowym}
+odpowiedniej zmiennej.
 
 Jeżeli zmienna losowa $(X,Y)$ jest typu skokowego, to:
-\[\bigwedge_iP(X=x_i)=P(X=x_i,Y=y_1)+P(X=x_i,Y=y_2)+... = \sum_kp_{ik}=p_{i\cdot}\]
-\[\bigwedge_kP(Y=y_k)=P(X=x_1,Y=y_k)+P(X=x_2,Y=y_k)+... = \sum_ip_{ik}=p_{\cdot k}\]
-Powyższe wzory definiują funkcję prawdopodobieństwa rozkładu brzegowego odpowiednio zmiennych losowych $X$ i $Y$ zmiennej losowej typu
-skokowego $(X,Y)$.
 
-Jeżeli natomiast zmienna losowa $(X,Y)$ jest typu ciągłego, to funkcja gęstości rozkładu brzegowego zmiennej losowej $X$ wyraża się wzorem:
-\[f_1(x) = \int_{-\infty}^{\infty}f(x,y)\dd{y}.\]
-Natomiast funkcja gęstości rozkładu brzegowego zmiennej losowej $Y$ wyraża się wzorem:
-\[f_2(y) = \int_{-\infty}^{\infty}f(x,y)\dd{x}.\]
-Ogólnie dla zmiennej losowej $(X,Y)$ dystrybuanta rozkładu brzegowego zmiennej losowej $X$ dana jest wzorem:
-\[F_1(x) = F(x,\infty) = P(X<x,Y<\infty),\]
-natomiast dystrybuanta rozkładu brzegowego zmiennej losowej $Y$ wyraża się wzorem:
-\[F_2(y) = F(\infty,y) = P(X<\infty,Y<y).\]
-W szczególności, jeśli zmienna losowa $(X,Y)$ jest typu skokowego, to np.:
-\[F_1(x) = \sum_{x_i<x}p_{i\cdot}=\sum_{x_i<x}\sum_kp_{ik}.\]
-Jesli natomiast zmienna losowa $(X,Y)$ jest typu ciągłego, to np.:
-\[F_1(x) = \int_{-\infty}^xf_1(x)\dd{x} = \int_{-\infty}^x\int_{-\infty}^{\infty}f(x,y)\dd{y}\dd{x}.\]
-Ważnym zagadnieniem są \textbf{rozkłady warunkowe}, np. zmiennej losowej $Y$ pod warunkiem, że zmienna losowa $X$ przyjmie ustaloną wartość. 
-
-Jeśli zmienna losowa $(X,Y)$ jest typu skokowego, to \textbf{dystrybuanta warunkowa} zmiennej losowej $Y$, pod warunkiem, że $X=x_i$, wyraża się wzorem:
-\begin{equation}
-F(y|x_i)=\sum_{y_k<y}P(y_k|x_i),
-\end{equation}
-gdzie $P(y_k|x_i)$ jest \textbf{warunkową funkcją prawdopodobieństwa} i wyraża się wzorem:
 \begin{eqnarray}
-P(y_k|x_i) & = & P(Y=y_k|X=x_i) = \frac{P(Y=y_k,X=x_i)}{P(X=x_i)} = \\\nonumber
-& = & \frac{p_{ik}}{p_{i\cdot}},~k=1,2,...
+  \bigwedge_i P(X = x_i) = P(X = x_i, Y = y_1) + P(X = x_i, Y = y_2) + \dotsc = \sum_kp_{ik} = p_{i\bullet} \\
+  \bigwedge_k P(Y = y_k) = P(X = x_1, Y = y_k) + P(X = x_2, Y = y_k) + \dotsc = \sum_i p_{ik} = p_{\bullet k}
 \end{eqnarray}
-Jeśli natomiast zmienna losowa $(X,Y)$ jest typu ciągłego, to, przy pewnych założeniach dotyczących granicy, dystrybuanta warunkowa zmiennej losowej $Y$ pod warunkiem,
-że $X=x$ wyraża się wzorem:
+
+Powyższe wzory definiują funkcję prawdopodobieństwa rozkładu brzegowego
+odpowiednio zmiennych losowych $X$ i~$Y$ zmiennej losowej typu skokowego $(X,Y)$.
+
+Jeżeli natomiast zmienna losowa $(X,Y)$ jest typu ciągłego, to~funkcja gęstości
+rozkładu brzegowego zmiennej losowej $X$ wyraża się wzorem:
+\[
+  f_1(x) = \int_{-\infty}^{\infty} f(x, y) \dd{y}.
+\]
+
+Natomiast funkcja gęstości rozkładu brzegowego zmiennej losowej $Y$ wyraża~się
+wzorem:
+\[
+  f_2(y) = \int_{-\infty}^{\infty} f(x, y) \dd{x}
+\]
+
+Ogólnie dla zmiennej losowej $(X,Y)$ dystrybuanta rozkładu brzegowego zmiennej
+losowej $X$ dana jest wzorem:
+\[
+  F_1(x) = F(x, \infty) = P(X < x, Y < \infty)
+\]
+natomiast dystrybuanta rozkładu brzegowego zmiennej losowej $Y$ wyraża się
+wzorem:
+\[
+  F_2(y) = F(\infty, y) = P(X < \infty, Y < y)
+\]
+
+W szczególności, jeśli zmienna losowa $(X,Y)$ jest typu skokowego, to np.:
+\[
+  F_1(x) = \sum_{x_i<x} p_{i\bullet} = \sum_{x_i<x} \sum_k p_{ik}
+\]
+
+Jesli natomiast zmienna losowa $(X,Y)$ jest typu ciągłego, to np.:
+\[
+  F_1(x) = \int_{-\infty}^x f_1(x) \dd{x} = \int_{-\infty}^x \int_{-\infty}^{\infty} f(x,y) \dd{y}\dd{x}
+\]
+
+Ważnym zagadnieniem są \textbf{rozkłady warunkowe}, np.~zmiennej losowej $Y$
+pod warunkiem, że zmienna losowa $X$ przyjmie ustaloną wartość.
+
+Jeśli zmienna losowa $(X,Y)$ jest typu skokowego, to \textbf{dystrybuanta
+  warunkowa} zmiennej losowej $Y$, pod warunkiem, że $X=x_i$, wyraża~się wzorem:
 \begin{equation}
-F(y|x)=\int_{-\infty}^yf(y|x)\dd{y},
+  F(y|x_i) = \sum_{y_k < y} P(y_k|x_i),
 \end{equation}
-gdzie $f(y|x)$ jest \textbf{warunkową funkcją gęstości} zmiennej losowej $Y$, wyrażającą się wzorem:
+gdzie $P(y_k|x_i)$ jest \textbf{warunkową funkcją prawdopodobieństwa}
+i~wyraża~się wzorem:
+\begin{eqnarray}
+  P(y_k|x_i) &=& P(Y = y_k|X = x_i) = \frac{P(Y = y_k,X = x_i)}{P(X = x_i)} = \\
+  \nonumber
+  &=& \frac{p_{ik}}{p_{i\bullet}},\;k=1,2,\dotsc
+\end{eqnarray}
+
+Jeśli natomiast zmienna losowa $(X,Y)$ jest typu ciągłego, to, przy pewnych
+założeniach dotyczących granicy, dystrybuanta warunkowa zmiennej losowej $Y$
+pod warunkiem, że $X=x$ wyraża się wzorem:
 \begin{equation}
-f(y|x) = \frac{f(x,y)}{f_1(x)},~f_1(x) > 0.
+  F(y|x)=\int_{-\infty}^yf(y|x)\dd{y},
+\end{equation}
+gdzie $f(y|x)$ jest \textbf{warunkową funkcją gęstości} zmiennej losowej $Y$,
+wyrażającą się wzorem:
+\begin{equation}
+  f(y|x) = \frac{f(x,y)}{f_1(x)},~f_1(x) > 0
 \end{equation}
 Widzimy zatem, że:
-\[F(y|x)f_1(x) = \int_{-\infty}^yf(x,y)\d{y}~~~~~~~/\textrm{całkujemy}\int_{-\infty}^{\infty}\]
+\[
+  F(y|x)f_1(x) = \int_{-\infty}^y f(x,y)\d{y}
+\]
 czyli:
 \begin{eqnarray}
-\nonumber \int_{-\infty}^{\infty}F(y|x)f_1(x)\dd{x} & = & \int_{-\infty}^{\infty}\int_{-\infty}^yf(x,y)\dd{y}\dd{x}\\
-\nonumber & = & \int_{-\infty}^y\int_{-\infty}^{\infty}f(x,y)\dd{x}\dd{y} = F_2(y)
+  \nonumber
+  \int_{-\infty}^{\infty} F(y|x) f_1(x) \dd{x} & = & \int_{-\infty}^{\infty} \int_{-\infty}^y f(x,y) \dd{y}\dd{x} \\
+  \nonumber
+  & = & \int_{-\infty}^y \int_{-\infty}^{\infty} f(x,y) \dd{x}\dd{y} = F_2(y)
 \end{eqnarray}
-Powyższy wzór stanowi uogólnienie twierdzenia o prawdopodobieństwie całkowitym na zmienne losowe typu ciągłego, czyli na nieprzeliczalną liczbę zdarzeń losowych.
+Powyższy wzór stanowi uogólnienie twierdzenia o prawdopodobieństwie całkowitym
+na zmienne losowe typu ciągłego, czyli na nieprzeliczalną liczbę zdarze
+losowych.
 
-Mając dane rozkłady warunkowe, możemy zdefiniować \textbf{momenty warunkowe}; przykładowo \textbf{warunkową wartość średnią} zmiennej losowej $Y$, pod warunkiem, że $X=x$
- (lub $X=x_i$ dla zmiennej losowej typu skokowego; jest to zapis ogólny) definiujemy ogólnie jako całkę Stieltjesa:
+Mając dane rozkłady warunkowe, możemy zdefiniować \textbf{momenty warunkowe};
+przykładowo \textbf{warunkową wartość średnią} zmiennej losowej~$Y$,
+pod warunkiem, że~$X=x$ (lub~$X=x_i$ dla~zmiennej losowej typu skokowego;
+jest~to zapis ogólny) definiujemy ogólnie jako całkę Stieltjesa:
 \begin{eqnarray}
-E(Y|X=x) & = & \int_{-\infty}^{\infty}y\dd{F(y|x)} = \\
-\nonumber
-& = & \left\{ \begin{array}{ll}
-\sum_ky_kP(y_k|x_i) & \textrm{gdy $(X,Y)$ jest typu skokowego}\\ \\
-\int_{-\infty}^{\infty}yf(y|x)\dd{y} & \textrm{gdy $(X,Y)$ jest typu ciągłego}
-\end{array} \right.
+  E(Y|X = x) &=& \int_{-\infty}^{\infty} y \dd{F(y|x)} = \\
+  \nonumber
+  &=& \begin{cases}
+    \sum_ky_kP(y_k|x_i) & \textrm{gdy $(X,Y)$ jest typu skokowego} \\
+    \int_{-\infty}^{\infty}yf(y|x)\dd{y} & \textrm{gdy $(X,Y)$ jest typu ciągłego}
+  \end{cases}
 \end{eqnarray}
 (zakładamy, że $f_1(x)>0$). Zauważmy, że słuszny jest wzór:
 \begin{eqnarray}
-E(Y) & = & \int_{-\infty}^{\infty}E(Y|X=x)\dd{F_1(x)} = \\
-\nonumber
-& = & \left\{ \begin{array}{ll}
-\sum_iE(Y|X=x_i)P(X=x_i) & \textrm{, gdy $(X,Y)$ jest typu skokowego}\\ \\
-\int_{-\infty}^{\infty}E(Y|X=x)f_1(x)\dd{x} & \textrm{, gdy $(X,Y)$ jest typu ciągłego}
-\end{array} \right.
+  E(Y) & = & \int_{-\infty}^{\infty}E(Y|X=x)\dd{F_1(x)} = \\
+  \nonumber
+  & = & \begin{cases}
+    \sum_iE(Y|X=x_i)P(X=x_i) & \textrm{, gdy $(X,Y)$ jest typu skokowego} \\
+    \int_{-\infty}^{\infty}E(Y|X=x)f_1(x)\dd{x} & \textrm{, gdy $(X,Y)$ jest typu ciągłego}
+  \end{cases}
 \end{eqnarray}
-Ogólnie, jeśli chcemy wyliczyć jakiś moment rozkładu zmiennej losowej np. $Y$, która zależy od zmiennej losowej $X$, to postępujemy dwuetapowo: 
+Ogólnie, jeśli chcemy wyliczyć jakiś moment rozkładu zmiennej losowej np.~$Y$,
+która zależy od zmiennej losowej $X$, to postępujemy dwuetapowo:
 \begin{enumerate}
- \item[\textbf{1)}] wyznaczamy ten moment, pod warunkiem, że zmienna losowa $X$ przyjmie określoną wartość (czyli liczymy $E(Y|X=x)$)
-\item[\textbf{2)}] uśredniamy otrzymany wynik po rozkładzie brzegowym zmiennej losowej $X$, czyli wyliczamy całkę Stieltjesa z tego wyniku względem dystrybuanty $F_1(x)$.
+  \item[\textbf{1)}] wyznaczamy ten moment, pod warunkiem, że zmienna losowa $X$
+    przyjmie określoną wartość (czyli liczymy $E(Y|X = x)$),
+  \item[\textbf{2)}] uśredniamy otrzymany wynik po rozkładzie brzegowym zmiennej
+    losowej $X$, czyli wyliczamy całkę Stieltjesa z tego wyniku względem
+    dystrybuanty $F_1(x)$.
 \end{enumerate}
+
 Przejdźmy obecnie do pojęć związanych z niezależnością zmiennych losowych.
 \begin{definition}
-Mówimy, że zmienne losowe $X$ i $Y$ są \textbf{niezależne}, jeśli dla dowolnych zbiorów borelowskich $S_1,S_2$ odpowiednio na osi $x$ i $y$, zdarzenia \\
-$Z_1=\{\omega:X(\omega)\in S_1\}, Z_2=\{\omega:Y(\omega)\in S_2\}$ spełniają relację:
-\begin{equation}
-P(Z_1\cap Z_2) = P(Z_1)\cdot P(Z_2)
-\end{equation}
-czyli są \textbf{zdarzeniami niezależnymi}.
+  Mówimy, że~zmienne losowe $X$ i~$Y$ są~\textbf{niezależne}, jeśli dla
+  dowolnych zbiorów borelowskich $S_1,S_2$ odpowiednio na osi $x$ i~$y$,
+  zdarzenia $Z_1=\{\omega:X(\omega)\in S_1\}, Z_2=\{\omega:Y(\omega)\in S_2\}$
+  spełniają relację:
+  \begin{equation}
+    P(Z_1\cap Z_2) = P(Z_1)\cdot P(Z_2)
+  \end{equation}
+  czyli są~\textbf{zdarzeniami niezależnymi}.
 \end{definition}
-Łatwo zauważyć, że powyższa relacja zachodzi wtw, gdy dla każdego $(x,y)\in\mathbb{R}^2$ prawdziwy jest warunek:
-\[F(x,y)=F_1(x)\cdot F_2(y).\]
-W związku z powyższym, niektórzy autorzy podają ten warunek jako definicję niezależności zmiennych losowych $X$ i $Y$.
+
+Łatwo zauważyć, że~powyższa relacja zachodzi wtw, gdy~dla~każdego
+$(x,y)\in\mathbb{R}^2$ prawdziwy jest warunek:
+\[
+  F(x,y)=F_1(x)\cdot F_2(y)
+\]
+W~związku z~powyższym, niektórzy autorzy podają ten warunek jako definicję
+niezależności zmiennych losowych $X$ i~$Y$.
 
 Oczywiście warunek ten dla zmiennych losowych typu skokowego można również zapisać w~postaci:
-\[\bigwedge_{i,k}p_{ik}=p_{i\cdot}\cdot p_{\cdot k}\]
+\[
+  \bigwedge_{i,k}p_{ik}=p_{i\cdot}\cdot p_{\cdot k}
+\]
 Natomiast dla zmiennych losowych typu ciągłego w postaci:
-\[f(x,y)=f_1(x)\cdot f_2(y).\]
+\[
+  f(x,y)=f_1(x)\cdot f_2(y)
+\]
+
 Zauważmy również, że jeśli $X$ i $Y$ są niezależne, to:
-\[F(x|y) = F_1(x),~F(y|x)=F_2(y)\]
+\[
+  F(x|y) = F_1(x),~F(y|x)=F_2(y)
+\]
+
 Uogólnimy obecnie definicję niezależności zmiennej losowej dla $n>2$.
 \begin{definition}
-Mówimy, że zmienne losowe $X_1,X_2,...,X_n$ są \textbf{niezależne}, jeśli dla dowolnych zbiorów borelowskich $S_1,S_2,...,S_n$ odpowiednio na osi $x_1,x_2,...,x_n$, 
-zdarzenia $Z_i=\{\omega:X_i(\omega)\in S_i\},~i=1,2,...,n$ spełniają relację:
-\begin{equation}
-P(Z_1\cap Z_2 \cap ...\cap Z_n) = P(Z_1)\cdot P(Z_2) \cdot ... \cdot P(Z_n). 
-\end{equation}
+  Mówimy, że zmienne losowe $X_1,X_2,\dotsc,X_n$ są \textbf{niezależne}, jeśli
+  dla~dowolnych zbiorów borelowskich $S_1,S_2,\dotsc,S_n$ odpowiednio na osi
+  $x_1,x_2,\dotsc,x_n$, zdarzenia $Z_i=\{\omega:X_i(\omega)\in S_i\},~i=1,2,
+  \dotsc,n$ spełniają relację:
+  \begin{equation}
+    P(Z_1\cap Z_2 \cap\dotsb\cap Z_n) = P(Z_1)\cdot P(Z_2) \dotsm P(Z_n)
+  \end{equation}
 \end{definition}
-Łatwo zauważyć, że powyższa relacja zachodzi wtw, gdy dla dowolnego\\ $(x_1,x_2,...,x_n)\in\mathbb{R}^n$ zachodzi równość:
-\[F(x_1,x_2,...,x_n)=F(x_1)\cdot F(x_2)\cdot...\cdot F(x_n).\]
+
+Łatwo zauważyć, że powyższa relacja zachodzi wtw, gdy~dla~dowolnego
+$(x_1,x_2,\dotsc,x_n)\in\mathbb{R}^n$ zachodzi równość:
+\[
+  F(x_1,x_2,\dotsc,x_n) = F(x_1) \cdot F(x_2) \dotsm F(x_n)
+\]
 \begin{definition}
-Mówimy, że ciąg zmiennych losowych $X_1,X_2,...$ jest \textbf{ciągiem zmiennych losowych niezależnych}, jesli dla dowolnego $n$ zmienne losowe $X_1,X_2,...,X_n$ 
-są niezależne.
+  Mówimy, że ciąg zmiennych losowych $X_1,X_2,\dotsc$ jest \textbf{ciągiem
+    zmiennych losowych niezależnych}, jesli dla~dowolnego $n$ zmienne losowe
+  $X_1,X_2,\dotsc,X_n$ są niezależne.
 \end{definition}
+
+
+
 \lecture{24.11.2008}
+
 Wykażemy teraz dwa ważne twierdzenia.
+
 \begin{theorem}
-Wartość średnia iloczynu dowolnej skończonej liczby niezależnych zmiennych losowych o skończonych wartościach średnich równa się iloczynowi
-wartości średnich tych zmiennych.
+  Wartość średnia iloczynu dowolnej skończonej liczby niezależnych zmiennych
+  losowych o~skończonych wartościach średnich równa się iloczynowi wartości
+  średnich tych zmiennych.
 \end{theorem}
-\textbf{Dowód}. Dla $n=2$ (dla $n>2$ dowód zachodzi przez indukcję).
-Niech $X, Y$ będą niezależnymi zmiennymi losowymi typu skokowego. Wówczas:
-\begin{eqnarray}
-\nonumber E(X Y) &=& \sum_i\sum_k p_{ik}x_iy_k = \sum_i\sum_k x_iy_kp_{i\cdot}p_{\cdot k} =\\
-\nonumber &=& \sum_ix_ip_{i\cdot}\sum_ky_kp_{\cdot k} = E(X)\cdot E(Y)
-\end{eqnarray}
-Zakładając, że zmienne losowe $X, Y$ są typu ciągłego, otrzymujemy:
-\begin{eqnarray}
-\nonumber E(X Y) &=& \int_{-\infty}^\infty\int_{-\infty}^\infty xyf(x,y)dxdy = \int_{-\infty}^\infty\int_{-\infty}^\infty xyf_1(x)f_2(y)dxdy = \\
-\nonumber &=& \int_{-\infty}^\infty xf_1(x)dx\cdot\int_{-\infty}^\infty yf_2(y)dy = E(X)\cdot E(Y)
-\end{eqnarray}
-$\circledcirc\Longrightarrow$ patrz koniec punktu 6.
+
+\begin{proof}
+  Dla $n=2$ (dla $n>2$ dowód zachodzi przez indukcję).
+  Niech $X, Y$ będą niezależnymi zmiennymi losowymi typu skokowego. Wówczas:
+  \begin{eqnarray}
+    \nonumber
+    E(X Y) &=& \sum_i\sum_k p_{ik}x_iy_k = \sum_i\sum_k x_iy_kp_{i\cdot}p_{\cdot k} =\\
+    \nonumber
+    &=& \sum_ix_ip_{i\cdot}\sum_ky_kp_{\cdot k} = E(X)\cdot E(Y)
+  \end{eqnarray}
+  Zakładając, że zmienne losowe $X, Y$ są typu ciągłego, otrzymujemy:
+  \begin{eqnarray}
+    \nonumber
+    E(X Y) &=& \int_{-\infty}^\infty\int_{-\infty}^\infty xyf(x,y)dxdy = \int_{-\infty}^\infty\int_{-\infty}^\infty xyf_1(x)f_2(y)dxdy = \\
+    \nonumber
+    &=& \int_{-\infty}^\infty xf_1(x)dx\cdot\int_{-\infty}^\infty yf_2(y)dy = E(X)\cdot E(Y)
+  \end{eqnarray}
+\end{proof}
+
 \begin{theorem}
-Wariancja sumy dowolnej skończonej liczby niezależnych zmiennych losowych o skończonych wariancjach jest równa sumie wariancji tych zmiennych.
+  Wariancja sumy dowolnej skończonej liczby niezależnych zmiennych losowych
+  o~skończonych wariancjach jest równa sumie wariancji tych zmiennych.
 \end{theorem}
-\textbf{Dowód}. (TODO dla $n=2$; dla $n>2$ dowód zachodzi przez indukcję).\newline\\
+
+\begin{proof}
+  (TODO dla $n=2$; dla $n>2$ dowód zachodzi przez indukcję)
+\end{proof}
+
 Zdefiniujemy obecnie podstawowe momenty zmiennej losowej $(X, Y)$.
 \begin{definition}
-\textbf{Momentem zwykłym rzędu} $l+n$ zmiennej losowej $(X, Y)$ nazywamy wyrażenie:
-\begin{eqnarray}
-m_{ln} &=& E(X^lY^n) = \int_{-\infty}^\infty\int_{-\infty}^\infty x^ly^ndF(x,y) = \\\nonumber
-&=& \left\{ \begin{array}{ll}
-\sum_i\sum_kx_i^ly_k^np_{ik} & \textrm{gdy $(X,Y)$ jest typu skokowego} \\\nonumber\\\nonumber
-\int_{-\infty}^\infty\int_{-\infty}^\infty x^ly^nf(x,y)dxdy& \textrm{gdy $(X,Y)$ jest typu ciągłego} 
-\end{array}\right.
-\end{eqnarray} 
+  \textbf{Momentem zwykłym rzędu} $l+n$ zmiennej losowej $(X, Y)$ nazywamy
+  wyrażenie:
+  \begin{eqnarray}
+    m_{ln} &=& E(X^lY^n) = \int_{-\infty}^\infty\int_{-\infty}^\infty x^ly^ndF(x,y) = \\
+    \nonumber
+    &=& \begin{cases}
+      \sum_i\sum_kx_i^ly_k^np_{ik} & \textrm{gdy $(X,Y)$ jest typu skokowego} \\\nonumber\\\nonumber
+      \int_{-\infty}^\infty\int_{-\infty}^\infty x^ly^nf(x,y)\dd{x}\dd{y}& \textrm{gdy $(X,Y)$ jest typu ciągłego} 
+    \end{cases}
+  \end{eqnarray}
 \end{definition}
+
 Ogólnie mogą istnieć dwa momenty rzędu pierwszego, tu:
 \[m_{10} = E(X)\]
 \[m_{01} = E(Y)\]
@@ -1162,10 +1329,11 @@ trzy momenty rzędu drugiego, tu:
 \[m_{02} = E(Y^2)\]
 itd.
 \begin{definition}
-\textbf{Momentem centralnym rzędu} $l+n$ zmiennej losowej $(X,Y)$ nazywamy wyrażenie:
-\begin{equation}
-\mu_{ln} = E[(X-m_{10})^l(Y-m_{01})^n]
-\end{equation}
+  \textbf{Momentem centralnym rzędu} $l+n$ zmiennej losowej $(X,Y)$ nazywamy
+  wyrażenie:
+  \begin{equation}
+    \mu_{ln} = E[(X-m_{10})^l(Y-m_{01})^n]
+  \end{equation}
 \end{definition}
 Łatwo zauważyć, że:
 \[\mu_{10} = E(X-m_{10}) = 0 = \mu_{01} = E(Y-m_{01}) \]
