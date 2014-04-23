@@ -960,7 +960,8 @@ Często wykorzystuje się pojęcie zmiennej losowej unormowanej.
 Przejdźmy teraz do zdefiniowania głównych parametrów pozycyjnych.
 
 \begin{definition}
-  \textbf{Wartością modalną} zmiennej losowej $X$ nazywamy punkt, w którym maksimum osiąga:
+  \textbf{Wartością modalną} zmiennej losowej $X$ nazywamy punkt, w~którym
+  maksimum osiąga:
   \begin{itemize}
     \item funkcja prawdopodobieństwa, gdy $X$ jest typu skokowego;
     \item funkcja gęstości, gdy $X$ jest typu ciągłego.
@@ -1101,8 +1102,10 @@ odpowiedniej zmiennej.
 Jeżeli zmienna losowa $(X,Y)$ jest typu skokowego, to:
 
 \begin{eqnarray}
-  \bigwedge_i P(X = x_i) = P(X = x_i, Y = y_1) + P(X = x_i, Y = y_2) + \dotsc = \sum_kp_{ik} = p_{i\bullet} \\
-  \bigwedge_k P(Y = y_k) = P(X = x_1, Y = y_k) + P(X = x_2, Y = y_k) + \dotsc = \sum_i p_{ik} = p_{\bullet k}
+  \bigwedge_i P(X = x_i) = P(X = x_i, Y = y_1) + P(X = x_i, Y = y_2) + \dotsc =
+    \sum_kp_{ik} = p_{i\bullet} \\
+  \bigwedge_k P(Y = y_k) = P(X = x_1, Y = y_k) + P(X = x_2, Y = y_k) + \dotsc =
+    \sum_i p_{ik} = p_{\bullet k}
 \end{eqnarray}
 
 Powyższe wzory definiują funkcję prawdopodobieństwa rozkładu brzegowego
@@ -1234,7 +1237,8 @@ $(x,y)\in\mathbb{R}^2$ prawdziwy jest warunek:
 W~związku z~powyższym, niektórzy autorzy podają ten warunek jako definicję
 niezależności zmiennych losowych $X$ i~$Y$.
 
-Oczywiście warunek ten dla zmiennych losowych typu skokowego można również zapisać w~postaci:
+Oczywiście warunek ten dla zmiennych losowych typu skokowego można również
+zapisać w~postaci:
 \[
   \bigwedge_{i,k}p_{ik}=p_{i\cdot}\cdot p_{\cdot k}
 \]
@@ -1514,7 +1518,7 @@ by zdarzenie $A$ wystąpiło w $k$-powtórzeniach ($A'$ w $n-k$ powtórzeniach).
 Ponieważ powtórzenia są niezależne, więc:
 \[
   P(\underbrace{A\cap A\cap\ldots\cap A}_{k\textrm{~razy}}\cap
-  \underbrace{A'\cap A'\cap\ldots\cap A' }_{n-k\textrm{~razy}}) = p^kq^{n-k}
+  \underbrace{A'\cap A'\cap\ldots\cap A'}_{n-k\textrm{~razy}}) = p^kq^{n-k}
 \]
 Oczywiście dla dowolnego $k$ zdarzenie polegające na $k$-krotnym wystąpieniu
 $k$ w~$n$ powtórzeniach może nastąpić $n \choose k$ sposobami,
@@ -1529,14 +1533,25 @@ czyli ostatecznie:
     dwumianowym (Bernoulliego)}.
 \end{definition}
 
-W domu: wyznaczyć $E(X)$ i $\mathscr{D}^2(X)$ (skorzystać ze wzoru dwumianowego Newtona).
+W domu: wyznaczyć $E(X)$ i $\mathscr{D}^2(X)$ (skorzystać ze wzoru dwumianowego
+Newtona).
+
+\begin{align*}
+  E(X) &= np \\
+  \mathscr{D}^2(X) &= npq
+\end{align*}
+
+
+
 \lecture{01.12.2008}
+
 \subsubsection{Rozkład Poissona}
 \begin{definition}
-Mówimy, że zmienna $X$ ma \textbf{rozkład Poissona}, jeśli jej funkcja prawdopodobieństwa dana jest wzorem:
-\begin{equation}
-P(X=k) = \frac{\lambda^k}{k!} e^{-\lambda}, ~~\lambda>0,~ k=0,1,2,\ldots
-\end{equation}
+  Mówimy, że zmienna $X$ ma \textbf{rozkład Poissona}, jeśli jej funkcja
+  prawdopodobieństwa dana jest wzorem:
+  \begin{equation}
+    P(X=k) = \frac{\lambda^k}{k!} e^{-\lambda},\;\lambda > 0,\:k=0,1,2,\dotsc
+  \end{equation}
 \end{definition}
 Wyliczmy wartość średnią i wariancję zmiennej losowej $X$. Wartość średnia:
 \[ E(X) = \sum_{k=1}^\infty k\frac{\lambda^k}{k!} e^{-\lambda} = e^{-\lambda} \sum_{k=1}^\infty \frac{\lambda^k}{(k-1)!} = 
